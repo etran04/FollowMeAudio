@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n7t-Lm-RXF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--iBeacons-->
@@ -93,23 +94,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="HGy-gg-Zfy">
-                            <rect key="frame" x="0.0" y="196" width="600" height="123"/>
+                            <rect key="frame" x="0.0" y="196" width="600" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5q-Gz-3zF">
-                                    <rect key="frame" x="155" y="47" width="291" height="30"/>
+                                    <rect key="frame" x="155" y="8" width="291" height="30"/>
                                     <state key="normal" title="Choose a speaker to pair with the iBeacon">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <segue destination="tj3-0O-pR3" kind="show" id="RK2-u5-kNS"/>
+                                        <segue destination="soY-Lq-caU" kind="show" id="uTs-da-hNi"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="u5q-Gz-3zF" firstAttribute="top" secondItem="HGy-gg-Zfy" secondAttribute="top" constant="47" id="8iO-BD-TKA"/>
-                                <constraint firstItem="u5q-Gz-3zF" firstAttribute="centerX" secondItem="HGy-gg-Zfy" secondAttribute="centerX" id="Egk-1X-PG7"/>
+                                <constraint firstItem="u5q-Gz-3zF" firstAttribute="centerX" secondItem="HGy-gg-Zfy" secondAttribute="centerX" id="Pvv-uM-z3h"/>
+                                <constraint firstItem="u5q-Gz-3zF" firstAttribute="top" secondItem="HGy-gg-Zfy" secondAttribute="topMargin" id="om9-dr-7Ai"/>
                             </constraints>
                         </view>
                         <sections>
@@ -223,30 +224,44 @@
             <point key="canvasLocation" x="2620" y="424"/>
         </scene>
         <!--Speaker Selection Table View Controller-->
-        <scene sceneID="a4Z-Jb-FOb">
+        <scene sceneID="a4l-vh-oGU">
             <objects>
-                <tableViewController id="tj3-0O-pR3" customClass="SpeakerSelectionTableViewController" customModule="FollowMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Cvx-8C-phO">
+                <tableViewController id="soY-Lq-caU" customClass="SpeakerSelectionTableViewController" customModule="FollowMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wlt-Xi-ZgT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="DEq-wO-5kK">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Speaker_Cell" textLabel="HBw-7o-0uR" detailTextLabel="8Zi-Jd-0Q0" style="IBUITableViewCellStyleSubtitle" id="aux-am-bNe">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DEq-wO-5kK" id="Dpm-uV-HOe">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aux-am-bNe" id="9LX-Zl-9mZ">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HBw-7o-0uR">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Zi-Jd-0Q0">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="tj3-0O-pR3" id="guW-uP-M1E"/>
-                            <outlet property="delegate" destination="tj3-0O-pR3" id="BdX-vC-aNL"/>
+                            <outlet property="dataSource" destination="soY-Lq-caU" id="ZPY-Ha-QyH"/>
+                            <outlet property="delegate" destination="soY-Lq-caU" id="SPs-z4-jP2"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qpj-MI-jvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OlB-9A-yKk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2312" y="1169"/>
+            <point key="canvasLocation" x="2620" y="1141"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JNi-fI-9gs">

@@ -6,22 +6,8 @@ struct ItemsViewControllerConstant {
     static let storedItemsKey = "storedItems"
 }
 
-// Time to average before first playback
-let kSecondsToStart = 2
-
-// Amount of seconds to gather data for
-let kSecondsToPollFor = 5
-
-// SuperOmni and SmartThing's beacon majors
-let kSuperOmniMajor = 1010
-let kSmartThingsMajor = 1100
-
 // White Box beacon major
 let kWhiteBoxMajor = 1001
-
-// Seonman's beacons major values
-let kEstimoteOneMinor = 60040 // super
-let kEstimoteTwoMinor = 7710  // smart
 
 class ItemsViewController: UIViewController {
 
@@ -32,8 +18,8 @@ class ItemsViewController: UIViewController {
     var HKWControl: HKWControlHandler!
     var items: [Item] = []
     var g_mp3Files = [String]()
-    var superOmniNdx: Int = -1
-    var smartThingsNdx: Int = -1
+    
+    var nameToIndexes = [String: Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +45,7 @@ class ItemsViewController: UIViewController {
                     println("initializeHKWirelessControl failed : invalid license key")
                     return
                 }
-                println("initializeHKWirelessControl - OK");
+                println("InitializeHKWirelessControl - OK");
                 
                 self.HKWControl = HKWControlHandler.sharedInstance()
 
@@ -79,7 +65,7 @@ class ItemsViewController: UIViewController {
         }
         else {
             self.playStreaming()
-            println("Started playing")
+            println("Started playing...")
         }
     }
     
@@ -147,16 +133,17 @@ class ItemsViewController: UIViewController {
      * If current speaker is neither, removes that speaker from playback session.
      * Currently hardcoded to look for speakers named "SuperOmni" and "SmartThings"
      */
-    func searchBeacons() {
+    func searchBeacons(item: Item) {
         for (var i = 0; i < self.HKWControl.getDeviceCount(); i++) {
             var dInfo = self.HKWControl.getDeviceInfoByIndex(i)
-            if dInfo.deviceName == "SuperOmni" {
-                self.superOmniNdx = i
-            }
-            else if dInfo.deviceName == "SmartThings" {
-                self.smartThingsNdx = i
+            if dInfo.deviceName == item.name {
+                println("Found a beacon to speaker match...")
+                println("Assigning \(i) to \(dInfo.deviceName)...")
+                self.nameToIndexes[dInfo.deviceName] = i
+                self.HKWControl.addDeviceToSession(dInfo.deviceId)
             }
             else {
+                println("Removing a speaker \(dInfo.deviceName) from session...")
                 self.HKWControl.removeDeviceFromSession(dInfo.deviceId)
             }
         }
@@ -168,14 +155,13 @@ class ItemsViewController: UIViewController {
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
         if (beacon.proximity == CLProximity.Near || beacon.proximity == CLProximity.Immediate) {
             var volumeLvl = self.changeVolumeBasedOnRange(beacon)
-            println("... Beacon with major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) at volume: \(volumeLvl)");
-            //int volumeLvl = [self changeVolumeBasedOnRSSI:rssi];
             self.HKWControl.setVolumeDevice(self.HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
+            println("... Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl)");
     
             // If song isn't playing start playing it
-            if !self.HKWControl.isPlaying() {
+            // if !self.HKWControl.isPlaying() {
             //    self.playStreaming()
-            }
+            //}
         }
         // If beacon is 'Far' or 'Unknown' (out of reach), turn down the volume of that speaker to 0
         else {
@@ -226,30 +212,6 @@ class ItemsViewController: UIViewController {
         
         return volume;
     }
-    
-    /* Polls for kSecondsToPollFor gathering n data points.
-     * Calculates the linear regression.
-     * Uses to compute the best fit rssi value to base the volume off of. */
-   /* func calcAvgAndStream(beacon: CLBeacon, index: Int) {
-    
-        var setCount: Int!
-    
-        // Get the number of seconds we've gather data for
-        if index == self.superOmniNdx {
-            setCount = self.superOmniDataPoints.count
-        }
-        else {
-            setCount = self.smartThingsDataPoints.count
-        }
-    
-        // Has full data set to calculate regression line
-        // ... or needs more data point (from 0 to kSecondsToStart)
-        if setCount == kSecondsToPollFor {
-            self.calculateRegressionLine(index, beacon)
-        } else {
-            self.initSpeakerPlay(beacon, index, setCount)
-        }
-    }*/
 }
 
 // MARK: UITableViewDataSource
@@ -306,30 +268,22 @@ extension ItemsViewController: CLLocationManagerDelegate {
     }
   
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-        
-        // If either ndx hasn't been assign, check to see if they're available.
-        if (self.superOmniNdx == -1 || self.smartThingsNdx == -1) {
-            self.searchBeacons()
-        }
-    
         if let beacons = beacons as? [CLBeacon] {
             for beacon in beacons {
                 for item in items {
                     if item == beacon {
+                        
+                        // Assign speaker indexes to beacons if neccesary
+                        self.searchBeacons(item)
+                        
                         item.lastSeenBeacon = beacon
                         
-                        println("Checking which beacon...")
+                        var speakerNdx = self.nameToIndexes[item.name];
+                        println("Index of speaker to be played from: \(speakerNdx)")
                         
-                        if (beacon.minor.isEqualToNumber(kEstimoteOneMinor) && self.superOmniNdx != -1) {
-                            println("Playing in SuperOmni...")
-                            self.checkBeacon(beacon, index: self.superOmniNdx, rssi: 0)
-                            //calcAvgAndStream: beacon speakerNdx:self.superOmniNdx];
-                        }
-                        
-                        if (beacon.major.isEqualToNumber(kWhiteBoxMajor) && self.smartThingsNdx != -1) {
-                            println("Playing in SmartThings...")
-                            self.checkBeacon(beacon, index: self.smartThingsNdx, rssi: 0)
-                            //[self calcAvgAndStream: beacon speakerNdx:self.smartThingsNdx];
+                        if (beacon.major.isEqualToNumber(kWhiteBoxMajor) && speakerNdx != -1) {
+                            println("Playing in speaker named \(item.name) with speakerNdx: \(speakerNdx)")
+                            self.checkBeacon(beacon, index: speakerNdx!, rssi: 0)
                         }
                     }
                 }

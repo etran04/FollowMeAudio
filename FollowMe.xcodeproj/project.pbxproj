@@ -10,7 +10,6 @@
 		075593B01B8FA3D000A0BBF6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075593A61B8FA3D000A0BBF6 /* LaunchScreen.xib */; };
 		075593B11B8FA3D000A0BBF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 075593A81B8FA3D000A0BBF6 /* Images.xcassets */; };
 		075593B61B8FA3D000A0BBF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075593AD1B8FA3D000A0BBF6 /* Main.storyboard */; };
-		075593BA1B8FA40600A0BBF6 /* FollowMeAudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075593B81B8FA40600A0BBF6 /* FollowMeAudioTests.swift */; };
 		075593BC1B8FA43A00A0BBF6 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075593A41B8FA3D000A0BBF6 /* AddItemViewController.swift */; };
 		075593BD1B8FA43A00A0BBF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075593A51B8FA3D000A0BBF6 /* AppDelegate.swift */; };
 		075593BE1B8FA43F00A0BBF6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075593AA1B8FA3D000A0BBF6 /* Item.swift */; };
@@ -20,7 +19,6 @@
 		075593CE1B8FAA5400A0BBF6 /* Drawing.png in Resources */ = {isa = PBXBuildFile; fileRef = 075593CD1B8FAA5400A0BBF6 /* Drawing.png */; };
 		075593DA1B8FAACF00A0BBF6 /* libHKWirelessHD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 075593D71B8FAACF00A0BBF6 /* libHKWirelessHD.a */; };
 		075593DB1B8FAACF00A0BBF6 /* License-iOS-Omni.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 075593D81B8FAACF00A0BBF6 /* License-iOS-Omni.pdf */; };
-		075593DC1B8FAACF00A0BBF6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 075593D91B8FAACF00A0BBF6 /* README.md */; };
 		075593DE1B8FAADF00A0BBF6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 075593DD1B8FAADF00A0BBF6 /* libz.dylib */; };
 		075593E01B8FAAE400A0BBF6 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 075593DF1B8FAAE400A0BBF6 /* libbz2.dylib */; };
 		075593E31B8FABDE00A0BBF6 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075593E21B8FABDE00A0BBF6 /* GlobalConstants.swift */; };
@@ -29,16 +27,6 @@
 		FB9CC97E1AD701DA0038DF33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9CC97D1AD701DA0038DF33 /* UIKit.framework */; };
 		FB9CC9801AD701E60038DF33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9CC97F1AD701E60038DF33 /* Foundation.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		FB9CC96C1AD701910038DF33 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FB9CC94E1AD701910038DF33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FB9CC9551AD701910038DF33;
-			remoteInfo = ForgetMeNot;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		075593A41B8FA3D000A0BBF6 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
@@ -262,7 +250,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				FB9CC96D1AD701910038DF33 /* PBXTargetDependency */,
 			);
 			name = FollowMeTests;
 			productName = ForgetMeNotTests;
@@ -343,12 +330,10 @@
 				075593BE1B8FA43F00A0BBF6 /* Item.swift in Sources */,
 				075593BF1B8FA43F00A0BBF6 /* ItemCell.swift in Sources */,
 				075593C01B8FA43F00A0BBF6 /* ItemsViewController.swift in Sources */,
-				075593DC1B8FAACF00A0BBF6 /* README.md in Sources */,
 				0785560C1B8FE17C00FA0F6C /* SpeakerSelectionTableViewController.swift in Sources */,
 				075593BC1B8FA43A00A0BBF6 /* AddItemViewController.swift in Sources */,
 				075593BD1B8FA43A00A0BBF6 /* AppDelegate.swift in Sources */,
 				075593E31B8FABDE00A0BBF6 /* GlobalConstants.swift in Sources */,
-				075593BA1B8FA40600A0BBF6 /* FollowMeAudioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,14 +345,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FB9CC96D1AD701910038DF33 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FB9CC9551AD701910038DF33 /* FollowMe */;
-			targetProxy = FB9CC96C1AD701910038DF33 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		075593A61B8FA3D000A0BBF6 /* LaunchScreen.xib */ = {
