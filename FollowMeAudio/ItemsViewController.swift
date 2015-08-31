@@ -129,9 +129,8 @@ class ItemsViewController: UIViewController {
     
     // MARK: Follow Me Audio Functionality
     
-    /* Goes through list of speakers and assigns index number to the superOmni and the smartThings speaker
-     * If current speaker is neither, removes that speaker from playback session.
-     * Currently hardcoded to look for speakers named "SuperOmni" and "SmartThings"
+    /* Goes through list of speakers and assigns index number to speaker if a match name occurs
+     * If current speaker does not match, removes that speaker from playback session.
      */
     func searchBeacons(item: Item) {
         for (var i = 0; i < self.HKWControl.getDeviceCount(); i++) {
@@ -183,6 +182,7 @@ class ItemsViewController: UIViewController {
     
         self.HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
         
+        // Alerts the user that music is being played
         var g_alert = UIAlertController(title: "Playback", message: "Song is currently being played", preferredStyle: .Alert)
         g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
             self.dismissViewControllerAnimated(false, completion: nil)
