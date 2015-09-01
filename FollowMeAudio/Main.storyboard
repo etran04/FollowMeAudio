@@ -66,11 +66,12 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="cCJ-Uo-b5L" kind="show" id="UDd-mt-LAC"/>
+                                    <segue destination="rTK-GN-y7r" kind="show" id="UDd-mt-LAC"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1Ur-9T-h6I">
+                            <color key="tintColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="rlS-BN-jtV" kind="show" identifier="Add" id="HVD-8K-O3a"/>
                             </connections>
@@ -81,6 +82,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <exit id="Q6G-Wl-4Oy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1117" y="429"/>
         </scene>
@@ -96,43 +98,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Volume Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR5-Ha-vxQ">
-                                <rect key="frame" x="203" y="72" width="194" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="194" id="L4q-1D-Tw1"/>
-                                    <constraint firstAttribute="height" constant="34" id="Yjk-C5-wiX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpQ-Um-w0o">
-                                <rect key="frame" x="285" y="114" width="30" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpQ-Um-w0o">
+                                <rect key="frame" x="337" y="168" width="30" height="46"/>
                                 <state key="normal" image="greenUp.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="volumeUpPressed:" destination="cCJ-Uo-b5L" eventType="touchUpInside" id="cOR-As-uxi"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWn-EP-LT8">
-                                <rect key="frame" x="285" y="189" width="30" height="46"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Volume offset: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR5-Ha-vxQ">
+                                <rect key="frame" x="218" y="126" width="164" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWn-EP-LT8">
+                                <rect key="frame" x="234" y="168" width="30" height="46"/>
                                 <state key="normal" image="redDown.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="volumeDownPressed:" destination="cCJ-Uo-b5L" eventType="touchUpInside" id="MGt-Qs-VcN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zX-Hm-TPm">
+                                <rect key="frame" x="189" y="416" width="222" height="30"/>
+                                <state key="normal" title="Play/Stop Current Song" image="play.png">
+                                    <color key="titleColor" red="0.12156862745098039" green="0.69411764705882351" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Q6G-Wl-4Oy" kind="unwind" unwindAction="playSong:" id="slf-b5-Yue"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-WH-K4M">
+                                <rect key="frame" x="234" y="364" width="133" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Choose Song">
+                                    <color key="titleColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sK4-KJ-Hfv" kind="show" id="g6e-kW-CL6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eR5-Ha-vxQ" firstAttribute="top" secondItem="tSh-Qd-8pB" secondAttribute="bottom" constant="8" symbolic="YES" id="0zB-cT-rPa"/>
-                            <constraint firstItem="eR5-Ha-vxQ" firstAttribute="centerX" secondItem="079-iQ-7UV" secondAttribute="centerX" id="7fs-58-tU7"/>
-                            <constraint firstItem="TpQ-Um-w0o" firstAttribute="centerX" secondItem="eR5-Ha-vxQ" secondAttribute="centerX" id="9Fq-lX-2CW"/>
-                            <constraint firstItem="TpQ-Um-w0o" firstAttribute="top" secondItem="eR5-Ha-vxQ" secondAttribute="bottom" constant="8" symbolic="YES" id="AKw-b3-Jg5"/>
-                            <constraint firstItem="CWn-EP-LT8" firstAttribute="top" secondItem="TpQ-Um-w0o" secondAttribute="bottom" constant="29" id="Jok-8D-B80"/>
-                            <constraint firstItem="CWn-EP-LT8" firstAttribute="leading" secondItem="TpQ-Um-w0o" secondAttribute="leading" id="oVS-c8-Mxs"/>
+                            <constraint firstAttribute="centerY" secondItem="TpQ-Um-w0o" secondAttribute="centerY" constant="152" id="24T-FX-o8D"/>
+                            <constraint firstAttribute="centerX" secondItem="TpQ-Um-w0o" secondAttribute="centerX" constant="-52" id="663-N5-esq"/>
+                            <constraint firstAttribute="centerX" secondItem="0zX-Hm-TPm" secondAttribute="centerX" id="7QN-r6-0PG"/>
+                            <constraint firstAttribute="centerY" secondItem="CWn-EP-LT8" secondAttribute="centerY" constant="152" id="EBI-V7-bTW"/>
+                            <constraint firstAttribute="centerX" secondItem="eR5-Ha-vxQ" secondAttribute="centerX" id="G9z-ol-sFz"/>
+                            <constraint firstAttribute="centerY" secondItem="0zX-Hm-TPm" secondAttribute="centerY" constant="-131" id="HPM-Th-kXJ"/>
+                            <constraint firstItem="0zX-Hm-TPm" firstAttribute="top" secondItem="B9B-WH-K4M" secondAttribute="bottom" constant="22" id="U3b-lh-O3r"/>
+                            <constraint firstAttribute="centerX" secondItem="B9B-WH-K4M" secondAttribute="centerX" constant="-0.5" id="Vr0-Hq-1gY"/>
+                            <constraint firstItem="CWn-EP-LT8" firstAttribute="top" secondItem="eR5-Ha-vxQ" secondAttribute="bottom" constant="8" id="eb3-jF-D42"/>
+                            <constraint firstItem="TpQ-Um-w0o" firstAttribute="top" secondItem="eR5-Ha-vxQ" secondAttribute="bottom" constant="8" id="oIo-3k-FuP"/>
+                            <constraint firstAttribute="centerX" secondItem="CWn-EP-LT8" secondAttribute="centerX" constant="51" id="rJP-aa-X7C"/>
+                            <constraint firstAttribute="centerY" secondItem="B9B-WH-K4M" secondAttribute="centerY" id="w4L-aE-gvp"/>
+                            <constraint firstAttribute="centerY" secondItem="eR5-Ha-vxQ" secondAttribute="centerY" constant="200" id="wOa-Dq-v9V"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Settings" id="rVR-7L-hJO"/>
+                    <connections>
+                        <outlet property="volumeLabel" destination="eR5-Ha-vxQ" id="Eww-Wb-WwR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQi-g5-oBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="2zk-mf-Wvq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="996" y="1222"/>
+            <point key="canvasLocation" x="1810" y="1124"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="GKc-Lj-6ZY">
@@ -149,6 +186,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5q-Gz-3zF">
                                     <rect key="frame" x="245" y="8" width="111" height="30"/>
                                     <state key="normal" title="List of Speakers">
+                                        <color key="titleColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -249,11 +287,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Item" id="wlB-N8-jOy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xuw-GM-rr1">
+                            <color key="tintColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="o5x-DE-Rf9" kind="unwind" unwindAction="cancelItem:" id="t1V-f8-ZCe"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="oHE-Zo-MUJ">
+                            <color key="tintColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="o5x-DE-Rf9" kind="unwind" identifier="SaveItemSegue" unwindAction="saveItem:" id="KtJ-Vo-QsG"/>
                             </connections>
@@ -310,7 +350,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OlB-9A-yKk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2620" y="1141"/>
+            <point key="canvasLocation" x="3308" y="424"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JNi-fI-9gs">
@@ -369,15 +409,49 @@
                             <outlet property="delegate" destination="sK4-KJ-Hfv" id="jp9-AT-dx5"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Choose a song" id="wgl-lu-HwG">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="10n-cM-tdd">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pgr-rT-7q0">
+                                <rect key="frame" x="451" y="7" width="30" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="save.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2zk-mf-Wvq" kind="unwind" unwindAction="saveSong:" id="k59-1c-VZJ"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaV-8X-ekP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1770" y="1222"/>
+            <point key="canvasLocation" x="2515" y="1124"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="m6G-zE-8lt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rTK-GN-y7r" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mce-ID-YII">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cCJ-Uo-b5L" kind="relationship" relationship="rootViewController" id="SX7-xL-HNI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bdp-4Q-SmG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1117" y="1124"/>
         </scene>
     </scenes>
     <resources>
         <image name="greenUp.png" width="30" height="46"/>
+        <image name="play.png" width="30" height="30"/>
         <image name="redDown.png" width="30" height="46"/>
+        <image name="save.png" width="30" height="29"/>
         <image name="settings.png" width="30" height="30"/>
     </resources>
 </document>

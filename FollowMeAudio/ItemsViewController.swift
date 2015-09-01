@@ -23,8 +23,8 @@ struct MusicInfo {
 // Constant time to gather data for logistic regression
 let kSecondsToPoll = 5
 
-// White Box beacon major
-let kWhiteBoxMajor = 1001
+// User inputted level
+var volumeOffset = 0
 
 class ItemsViewController: UIViewController {
 
@@ -47,6 +47,10 @@ class ItemsViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         loadItems()
+        
+        musicInfo = MusicInfo()
+        musicInfo.defaultSong = true;
+        musicInfo.songPersistentID = 0;
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -76,23 +80,6 @@ class ItemsViewController: UIViewController {
                 }
                 
             })
-        }
-    }
-    
-    @IBAction func stopPressed(sender: UIButton) {
-        if HKWControl.isPlaying() {
-            HKWControl.stop()
-            // Alerts the user music playback stopped
-            g_alert = UIAlertController(title: "Stopped", message: "Song is stopped", preferredStyle: .Alert)
-            g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
-                self.dismissViewControllerAnimated(false, completion: nil)
-            }))
-            self.presentViewController(g_alert, animated: false, completion: nil)
-            println("Stopped playing...")
-        }
-        else {
-            playStreaming()
-            println("Started playing...")
         }
     }
     
@@ -150,6 +137,20 @@ class ItemsViewController: UIViewController {
             persistItems()
         }
     }
+    
+    @IBAction func saveSong(segue: UIStoryboardSegue) {
+        let songVC = segue.sourceViewController as! ChooseSoundTableViewController
+        if let newSong = songVC.musicInfo {
+            musicInfo = newSong
+            HKWControl.stop()
+            playStreamingWithPersistentID(musicInfo.defaultSong, persistentId: musicInfo.songPersistentID)
+        }
+    }
+    
+    @IBAction func playSong(segue: UIStoryboardSegue) {
+        let songVC = segue.sourceViewController as! SettingsVC
+        startPlayback()
+    }
   
     @IBAction func cancelItem(segue: UIStoryboardSegue) {
         // Do nothing
@@ -194,7 +195,7 @@ class ItemsViewController: UIViewController {
     
             // If song isn't playing start playing it
             // if !self.HKWControl.isPlaying() {
-            //    self.playStreaming()
+            //    playStreamingWithPersistentID(false, 0)
             //}
         }
         // If beacon is 'Far' or 'Unknown' (out of reach), turn down the volume of that speaker to 0
@@ -204,17 +205,30 @@ class ItemsViewController: UIViewController {
     
     }
     
-    /* Starts the playing of the first mp3 file embedded into project */
-    func playStreaming() {
-        var bundleRoot = NSBundle.mainBundle().bundlePath
-        var dirContents: NSArray = NSFileManager.defaultManager().contentsOfDirectoryAtPath(bundleRoot, error: nil)!
-        var fltr: NSPredicate = NSPredicate(format: "self ENDSWITH '.mp3'")
-        g_mp3Files = dirContents.filteredArrayUsingPredicate(fltr) as! [String]
+    /* Starts the playing of the first mp3 file embedded into project, or a provided persistent id */
+    func playStreamingWithPersistentID(playDefault: Bool, persistentId: MPMediaEntityPersistentID ) {
+        // Default song
+        if playDefault {
+            var bundleRoot = NSBundle.mainBundle().bundlePath
+            var dirContents: NSArray = NSFileManager.defaultManager().contentsOfDirectoryAtPath(bundleRoot, error: nil)!
+            var fltr: NSPredicate = NSPredicate(format: "self ENDSWITH '.mp3'")
+            g_mp3Files = dirContents.filteredArrayUsingPredicate(fltr) as! [String]
     
-        var assetURL = NSURL.fileURLWithPath(bundleRoot.stringByAppendingPathComponent(g_mp3Files[0]))
-        println("NSURL: \(assetURL)")
+            var assetURL = NSURL.fileURLWithPath(bundleRoot.stringByAppendingPathComponent(g_mp3Files[0]))
+            println("NSURL: \(assetURL)")
     
-        HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
+            HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
+        }
+        // Chosen song
+        else {
+            let query = MPMediaQuery.songsQuery()
+            let predicate = MPMediaPropertyPredicate(value: String(persistentId), forProperty: MPMediaItemPropertyPersistentID)
+            query.addFilterPredicate(predicate)
+            
+            let item = query.items.first as! MPMediaItem
+            var assetURL = item.assetURL
+            HKWControl.playCAF(assetURL, songName: item.title, resumeFlag: false)
+        }
         
         // Alerts the user  music is being played
         g_alert = UIAlertController(title: "Playback", message: "Song is currently being played", preferredStyle: .Alert)
@@ -222,7 +236,24 @@ class ItemsViewController: UIViewController {
             self.dismissViewControllerAnimated(false, completion: nil)
         }))
         self.presentViewController(g_alert, animated: false, completion: nil)
-
+    }
+    
+    /* Helper method for quick playback and stopping of current played track */
+    func startPlayback() {
+        if HKWControl.isPlaying() {
+            HKWControl.stop()
+            // Alerts the user music playback stopped
+            g_alert = UIAlertController(title: "Stopped", message: "Song is stopped", preferredStyle: .Alert)
+            g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
+                self.dismissViewControllerAnimated(false, completion: nil)
+            }))
+            self.presentViewController(g_alert, animated: false, completion: nil)
+            println("Stopped playing...")
+        }
+        else {
+            playStreamingWithPersistentID(musicInfo.defaultSong, persistentId: musicInfo.songPersistentID)
+            println("Started playing...")
+        }
     }
     
     /* Used to determine the volume of the associated beacon to speaker. */
@@ -233,10 +264,10 @@ class ItemsViewController: UIViewController {
         case CLProximity.Far:
             break;
         case CLProximity.Near:
-            volume = 15;
+            volume = 15 + volumeOffset;
             break;
         case CLProximity.Immediate:
-            volume = 10;
+            volume = 10 + volumeOffset;
             break;
         case CLProximity.Unknown:
             break;
@@ -310,10 +341,9 @@ extension ItemsViewController: CLLocationManagerDelegate {
                         
                         // Assign speaker indexes to beacons if neccesary
                         searchBeacons(item)
-                        
                         item.lastSeenBeacon = beacon
                         
-                        // There is an assocaited beacon to speaker pair
+                        // There is an associated beacon to speaker pair
                         var speakerNdx = nameToIndexes[item.name]?.speakerNdx;
                         if speakerNdx != nil {
                             // If still needs to gather data
@@ -324,10 +354,8 @@ extension ItemsViewController: CLLocationManagerDelegate {
                             else {
                                 var result = linearRegression(dataPoints)
                                 var newRSSI = (result.slope * Double(beacon.accuracy)) + result.intercept
-                                println("Result: \(result)\n ---------------------------------")
                                 checkBeaconAndPlay(beacon, index: speakerNdx!, rssi: newRSSI)
-                                dataPoints.removeAtIndex(0)
-                                
+                                dataPoints.removeAtIndex(0)                                
                             }
                         }
                     }

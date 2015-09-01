@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		072318901B950C4400C3B2F9 /* LinearRegression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723188F1B950C4400C3B2F9 /* LinearRegression.swift */; };
-		073EAFDE1B9631A00079532D /* Drawing.png in Resources */ = {isa = PBXBuildFile; fileRef = 073EAFDD1B9631A00079532D /* Drawing.png */; };
+		073EAFDE1B9631A00079532D /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 073EAFDD1B9631A00079532D /* play.png */; };
 		073EAFE01B9634E20079532D /* ChooseSoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073EAFDF1B9634E20079532D /* ChooseSoundTableViewController.swift */; };
 		074A897A1B9646A2009FF470 /* greenUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 074A89791B9646A2009FF470 /* greenUp.png */; };
 		074A897C1B9646A5009FF470 /* redDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 074A897B1B9646A5009FF470 /* redDown.png */; };
 		074A897E1B964784009FF470 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 074A897D1B964784009FF470 /* settings.png */; };
 		074A89801B964838009FF470 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A897F1B964838009FF470 /* SettingsVC.swift */; };
+		074A89821B965C12009FF470 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 074A89811B965C12009FF470 /* save.png */; };
 		075593B01B8FA3D000A0BBF6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075593A61B8FA3D000A0BBF6 /* LaunchScreen.xib */; };
 		075593B11B8FA3D000A0BBF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 075593A81B8FA3D000A0BBF6 /* Images.xcassets */; };
 		075593B61B8FA3D000A0BBF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075593AD1B8FA3D000A0BBF6 /* Main.storyboard */; };
@@ -36,12 +37,13 @@
 
 /* Begin PBXFileReference section */
 		0723188F1B950C4400C3B2F9 /* LinearRegression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearRegression.swift; sourceTree = "<group>"; };
-		073EAFDD1B9631A00079532D /* Drawing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drawing.png; sourceTree = "<group>"; };
+		073EAFDD1B9631A00079532D /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		073EAFDF1B9634E20079532D /* ChooseSoundTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSoundTableViewController.swift; sourceTree = "<group>"; };
 		074A89791B9646A2009FF470 /* greenUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenUp.png; sourceTree = "<group>"; };
 		074A897B1B9646A5009FF470 /* redDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redDown.png; sourceTree = "<group>"; };
 		074A897D1B964784009FF470 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		074A897F1B964838009FF470 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		074A89811B965C12009FF470 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		075593A41B8FA3D000A0BBF6 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		075593A51B8FA3D000A0BBF6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		075593A71B8FA3D000A0BBF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -170,7 +172,8 @@
 		075593C61B8FA7BA00A0BBF6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				073EAFDD1B9631A00079532D /* Drawing.png */,
+				074A89811B965C12009FF470 /* save.png */,
+				073EAFDD1B9631A00079532D /* play.png */,
 				074A89791B9646A2009FF470 /* greenUp.png */,
 				074A897B1B9646A5009FF470 /* redDown.png */,
 				074A897D1B964784009FF470 /* settings.png */,
@@ -327,7 +330,8 @@
 				075593CC1B8FA92900A0BBF6 /* The Hills.mp3 in Resources */,
 				075593B01B8FA3D000A0BBF6 /* LaunchScreen.xib in Resources */,
 				075593B11B8FA3D000A0BBF6 /* Images.xcassets in Resources */,
-				073EAFDE1B9631A00079532D /* Drawing.png in Resources */,
+				073EAFDE1B9631A00079532D /* play.png in Resources */,
+				074A89821B965C12009FF470 /* save.png in Resources */,
 				074A897E1B964784009FF470 /* settings.png in Resources */,
 				074A897A1B9646A2009FF470 /* greenUp.png in Resources */,
 				075593DB1B8FAACF00A0BBF6 /* License-iOS-Omni.pdf in Resources */,
