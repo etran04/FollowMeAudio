@@ -9,9 +9,15 @@
 import UIKit
 import Foundation
 import CoreLocation
+import MediaPlayer
 
 struct ItemsViewControllerConstant {
     static let storedItemsKey = "storedItems"
+}
+
+struct MusicInfo {
+    var defaultSong: Bool!
+    var songPersistentID: MPMediaEntityPersistentID!
 }
 
 // Constant time to gather data for logistic regression
@@ -23,14 +29,18 @@ let kWhiteBoxMajor = 1001
 class ItemsViewController: UIViewController {
 
     @IBOutlet weak var itemsTableView: UITableView!
-  
+    
+    var g_alert: UIAlertController!
+    
     let locationManager = CLLocationManager()
     var HKWControl: HKWControlHandler!
     var items: [Item] = []
     var g_mp3Files = [String]()
     
-    var nameToIndexes = [String: Int]()
+    var nameToIndexes = [String: Item]()
     var dataPoints = [regressionInput]();
+    
+    var musicInfo: MusicInfo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +62,7 @@ class ItemsViewController: UIViewController {
         if !HKWControlHandler.sharedInstance().initializing() && !HKWControlHandler.sharedInstance().isInitialized() {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                if HKWControlHandler.sharedInstance().initializeHKWirelessController(kLicenseKeyGlobal, withSpeakersAdded:true) != 0 {
+                if HKWControlHandler.sharedInstance().initializeHKWirelessController(kLicenseKeyGlobal, withSpeakersAdded:false) != 0 {
                     println("initializeHKWirelessControl failed : invalid license key")
                     return
                 }
@@ -70,12 +80,18 @@ class ItemsViewController: UIViewController {
     }
     
     @IBAction func stopPressed(sender: UIButton) {
-        if self.HKWControl.isPlaying() {
-            self.HKWControl.stop()
+        if HKWControl.isPlaying() {
+            HKWControl.stop()
+            // Alerts the user music playback stopped
+            g_alert = UIAlertController(title: "Stopped", message: "Song is stopped", preferredStyle: .Alert)
+            g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
+                self.dismissViewControllerAnimated(false, completion: nil)
+            }))
+            self.presentViewController(g_alert, animated: false, completion: nil)
             println("Stopped playing...")
         }
         else {
-            self.playStreaming()
+            playStreaming()
             println("Started playing...")
         }
     }
@@ -130,6 +146,7 @@ class ItemsViewController: UIViewController {
             itemsTableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
             itemsTableView.endUpdates()
             startMonitoringItem(newItem)
+            searchBeacons(newItem)
             persistItems()
         }
     }
@@ -144,30 +161,36 @@ class ItemsViewController: UIViewController {
      * If current speaker does not match, removes that speaker from playback session.
      */
     func searchBeacons(item: Item) {
-        for (var i = 0; i < self.HKWControl.getDeviceCount(); i++) {
-            var dInfo = self.HKWControl.getDeviceInfoByIndex(i)
-            println("DeviceName: \(dInfo.deviceName) | BeaconName: \(item.name)");
-            if dInfo.deviceName == item.name {
+        for (var i = 0; i < HKWControl.getDeviceCount(); i++) {
+            var dInfo = HKWControl.getDeviceInfoByIndex(i)
+            if dInfo.deviceName == item.name && !dInfo.active {
+                println("DeviceName: \(dInfo.deviceName) | BeaconName: \(item.name)");
                 println("Assigning speaker: \(dInfo.deviceName) w/ \(i)...")
-                self.nameToIndexes[dInfo.deviceName] = i
-                self.HKWControl.addDeviceToSession(dInfo.deviceId)
-            }
-            else {
-                println("Removing speaker: \(dInfo.deviceName) from session...")
-                self.nameToIndexes.removeValueForKey(dInfo.deviceName)
-                self.HKWControl.removeDeviceFromSession(dInfo.deviceId)
+                item.setIndex(i)
+                nameToIndexes[dInfo.deviceName] = item
+                HKWControl.addDeviceToSession(dInfo.deviceId)
             }
         }
     }
     
+    /* Helper method for removing speaker from session when removed from table */
+    func removeActiveSpeaker(item: Item) {
+        var i = nameToIndexes[item.name]?.speakerNdx
+        if i != nil {
+            HKWControl.removeDeviceFromSession(HKWControl.getDeviceInfoByIndex(i!).deviceId)
+            nameToIndexes.removeValueForKey(item.name)
+            println("Removing speaker: \(item.name) from session...")
+        }
+    }
+    
     /* Helper method for determining which speaker - beacon is interacting and acts accordingly */
-    func checkBeacon(beacon:CLBeacon, index: Int, rssi: Double) {
+    func checkBeaconAndPlay(beacon:CLBeacon, index: Int, rssi: Double) {
     
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
         if (beacon.proximity == CLProximity.Near || beacon.proximity == CLProximity.Immediate) {
-            var volumeLvl = self.changeVolumeBasedOnRange(beacon)
-            self.HKWControl.setVolumeDevice(self.HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
-            println("... Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(rssi)");
+            var volumeLvl = changeVolumeBasedOnRange(beacon)
+            HKWControl.setVolumeDevice(HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
+            println("Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(rssi)");
     
             // If song isn't playing start playing it
             // if !self.HKWControl.isPlaying() {
@@ -176,11 +199,10 @@ class ItemsViewController: UIViewController {
         }
         // If beacon is 'Far' or 'Unknown' (out of reach), turn down the volume of that speaker to 0
         else {
-            self.HKWControl.setVolumeDevice(self.HKWControl.getDeviceInfoByIndex(index).deviceId, volume: 0)
+            HKWControl.setVolumeDevice(HKWControl.getDeviceInfoByIndex(index).deviceId, volume: 0)
         }
     
     }
-    
     
     /* Starts the playing of the first mp3 file embedded into project */
     func playStreaming() {
@@ -192,10 +214,10 @@ class ItemsViewController: UIViewController {
         var assetURL = NSURL.fileURLWithPath(bundleRoot.stringByAppendingPathComponent(g_mp3Files[0]))
         println("NSURL: \(assetURL)")
     
-        self.HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
+        HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
         
         // Alerts the user  music is being played
-        var g_alert = UIAlertController(title: "Playback", message: "Song is currently being played", preferredStyle: .Alert)
+        g_alert = UIAlertController(title: "Playback", message: "Song is currently being played", preferredStyle: .Alert)
         g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
             self.dismissViewControllerAnimated(false, completion: nil)
         }))
@@ -208,7 +230,7 @@ class ItemsViewController: UIViewController {
         var volume = 0;
         
         switch (beacon.proximity) {
-        case CLProximity.Far: // Should never play at 20 because speaker doesn't play at far range
+        case CLProximity.Far:
             break;
         case CLProximity.Near:
             volume = 15;
@@ -246,6 +268,7 @@ extension ItemsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let itemToRemove = items[indexPath.row] as Item
+            removeActiveSpeaker(itemToRemove)
             stopMonitoringItem(itemToRemove)
             tableView.beginUpdates()
             items.removeAtIndex(indexPath.row)
@@ -286,27 +309,24 @@ extension ItemsViewController: CLLocationManagerDelegate {
                     if item == beacon {
                         
                         // Assign speaker indexes to beacons if neccesary
-                        self.searchBeacons(item)
+                        searchBeacons(item)
                         
                         item.lastSeenBeacon = beacon
-                        var speakerNdx = self.nameToIndexes[item.name];
                         
-                        if (beacon.major.isEqualToNumber(kWhiteBoxMajor) && speakerNdx != nil) {
-                            println("Playing in speaker: \(item.name) w/speakerNdx: \(speakerNdx)")
-                            
-                            //If still needs to gather data
-                            if (self.dataPoints.count < kSecondsToPoll) {
-                                self.dataPoints.append(regressionInput(xValue: Double(beacon.accuracy), yValue: Double(beacon.rssi)))
+                        // There is an assocaited beacon to speaker pair
+                        var speakerNdx = nameToIndexes[item.name]?.speakerNdx;
+                        if speakerNdx != nil {
+                            // If still needs to gather data
+                            if (dataPoints.count < kSecondsToPoll) {
+                                dataPoints.append(regressionInput(xValue: Double(beacon.accuracy), yValue: Double(beacon.rssi)))
                             }
-                            //Has enough data, start to do logarthimic interpolation
+                            // Has enough data, start to do linear interpolation
                             else {
-                                var result = linearRegression(self.dataPoints)
+                                var result = linearRegression(dataPoints)
                                 var newRSSI = (result.slope * Double(beacon.accuracy)) + result.intercept
-                                println("result: \(result)")
-                                
-                                self.checkBeacon(beacon, index: speakerNdx!, rssi: newRSSI)
-                                
-                                self.dataPoints.removeAtIndex(0)
+                                println("Result: \(result)\n ---------------------------------")
+                                checkBeaconAndPlay(beacon, index: speakerNdx!, rssi: newRSSI)
+                                dataPoints.removeAtIndex(0)
                                 
                             }
                         }
@@ -316,4 +336,14 @@ extension ItemsViewController: CLLocationManagerDelegate {
         }
     }
 }
+
+// MARK: HKWDeviceHandlerDelegate
+extension ItemsViewController: HKWPlayerEventHandlerDelegate {
+    func hkwPlayEnded() {
+        if g_alert != nil {
+            g_alert.dismissViewControllerAnimated(false, completion: nil)
+        }
+    }
+}
+
 

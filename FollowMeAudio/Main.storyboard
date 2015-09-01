@@ -58,15 +58,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="iBeacons" id="AIe-6e-Pjc">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="6nl-y5-FYJ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="K5n-MS-KVB">
-                                <rect key="frame" x="16" y="11" width="40" height="40"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="aWX-Rr-Em6">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DCy-sT-ogh">
+                                <rect key="frame" x="16" y="7" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Drawing.png">
+                                <state key="normal" image="settings.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="RcB-u9-Iv4"/>
+                                    <segue destination="cCJ-Uo-b5L" kind="show" id="UDd-mt-LAC"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -83,6 +83,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1117" y="429"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="LK2-7j-zeA">
+            <objects>
+                <viewController title="Settings" id="cCJ-Uo-b5L" customClass="SettingsVC" customModule="FollowMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tSh-Qd-8pB"/>
+                        <viewControllerLayoutGuide type="bottom" id="DTd-Iz-ZkR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="079-iQ-7UV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Volume Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR5-Ha-vxQ">
+                                <rect key="frame" x="203" y="72" width="194" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="194" id="L4q-1D-Tw1"/>
+                                    <constraint firstAttribute="height" constant="34" id="Yjk-C5-wiX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpQ-Um-w0o">
+                                <rect key="frame" x="285" y="114" width="30" height="46"/>
+                                <state key="normal" image="greenUp.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWn-EP-LT8">
+                                <rect key="frame" x="285" y="189" width="30" height="46"/>
+                                <state key="normal" image="redDown.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eR5-Ha-vxQ" firstAttribute="top" secondItem="tSh-Qd-8pB" secondAttribute="bottom" constant="8" symbolic="YES" id="0zB-cT-rPa"/>
+                            <constraint firstItem="eR5-Ha-vxQ" firstAttribute="centerX" secondItem="079-iQ-7UV" secondAttribute="centerX" id="7fs-58-tU7"/>
+                            <constraint firstItem="TpQ-Um-w0o" firstAttribute="centerX" secondItem="eR5-Ha-vxQ" secondAttribute="centerX" id="9Fq-lX-2CW"/>
+                            <constraint firstItem="TpQ-Um-w0o" firstAttribute="top" secondItem="eR5-Ha-vxQ" secondAttribute="bottom" constant="8" symbolic="YES" id="AKw-b3-Jg5"/>
+                            <constraint firstItem="CWn-EP-LT8" firstAttribute="top" secondItem="TpQ-Um-w0o" secondAttribute="bottom" constant="29" id="Jok-8D-B80"/>
+                            <constraint firstItem="CWn-EP-LT8" firstAttribute="leading" secondItem="TpQ-Um-w0o" secondAttribute="leading" id="oVS-c8-Mxs"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LQi-g5-oBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="1222"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="GKc-Lj-6ZY">
@@ -298,8 +348,36 @@
             </objects>
             <point key="canvasLocation" x="1878" y="424"/>
         </scene>
+        <!--Choose Song-->
+        <scene sceneID="zYI-xK-ZCT">
+            <objects>
+                <tableViewController title="Choose Song" id="sK4-KJ-Hfv" customClass="ChooseSoundTableViewController" customModule="FollowMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="MSb-U9-JC4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="kC5-FB-lxx">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kC5-FB-lxx" id="twU-Cr-JAG">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sK4-KJ-Hfv" id="DOT-NS-1e7"/>
+                            <outlet property="delegate" destination="sK4-KJ-Hfv" id="jp9-AT-dx5"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XaV-8X-ekP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770" y="1222"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Drawing.png" width="40" height="40"/>
+        <image name="greenUp.png" width="30" height="46"/>
+        <image name="redDown.png" width="30" height="46"/>
+        <image name="settings.png" width="30" height="30"/>
     </resources>
 </document>

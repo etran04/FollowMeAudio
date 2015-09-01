@@ -10,8 +10,6 @@
 	<string>FollowMe</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9F65A476A58933AE6B22EAE730A194955F98FC66</key>
-		<string>https://github.com/mattt/Surge.git</string>
 		<key>F22CAF835BDCAD9B81B5FBC547A701FB9F689F80</key>
 		<string>https://github.com/etran04/FollowMeAudio.git</string>
 	</dict>
@@ -19,8 +17,6 @@
 	<string>FollowMe.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9F65A476A58933AE6B22EAE730A194955F98FC66</key>
-		<string>../../../Surge</string>
 		<key>F22CAF835BDCAD9B81B5FBC547A701FB9F689F80</key>
 		<string>../..</string>
 	</dict>
@@ -39,14 +35,6 @@
 			<string>F22CAF835BDCAD9B81B5FBC547A701FB9F689F80</string>
 			<key>IDESourceControlWCCName</key>
 			<string>FollowMeAudio</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9F65A476A58933AE6B22EAE730A194955F98FC66</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Surge</string>
 		</dict>
 	</array>
 </dict>

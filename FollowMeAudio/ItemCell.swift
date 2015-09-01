@@ -60,7 +60,8 @@ class ItemCell: UITableViewCell {
       if anItem == item && keyPath == "lastSeenBeacon" {
         let proximity = nameForProximity(anItem.lastSeenBeacon!.proximity)
         let accuracy = NSString(format: "%.2f", anItem.lastSeenBeacon!.accuracy)
-        detailTextLabel!.text = "Location: \(proximity) (approx. \(accuracy)m)"
+        let rssi = anItem.lastSeenBeacon!.rssi
+        detailTextLabel!.text = "Location: \(proximity) (approx. \(accuracy)m || rssi: \(rssi))"
       }
     }
   }
