@@ -1,3 +1,11 @@
+//
+//  AppDelegate.swift
+//  FollowMe
+//
+//  Created by Eric Tran on 8/27/15.
+//  Copyright (c) 2015 Harman International. All rights reserved.
+//
+
 import UIKit
 import CoreLocation
 
@@ -45,7 +53,7 @@ extension AppDelegate: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
     if let beaconRegion = region as? CLBeaconRegion {
       var notification = UILocalNotification()
-      notification.alertBody = "Are you forgetting something?"
+      notification.alertBody = "Left a beacon region!"
       notification.soundName = "Default"
       UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }

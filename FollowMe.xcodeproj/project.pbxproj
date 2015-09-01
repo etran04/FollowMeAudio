@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072318901B950C4400C3B2F9 /* LinearRegression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723188F1B950C4400C3B2F9 /* LinearRegression.swift */; };
 		075593B01B8FA3D000A0BBF6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075593A61B8FA3D000A0BBF6 /* LaunchScreen.xib */; };
 		075593B11B8FA3D000A0BBF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 075593A81B8FA3D000A0BBF6 /* Images.xcassets */; };
 		075593B61B8FA3D000A0BBF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075593AD1B8FA3D000A0BBF6 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0723188F1B950C4400C3B2F9 /* LinearRegression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearRegression.swift; sourceTree = "<group>"; };
 		075593A41B8FA3D000A0BBF6 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		075593A51B8FA3D000A0BBF6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		075593A71B8FA3D000A0BBF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -106,8 +108,6 @@
 				075593C21B8FA65000A0BBF6 /* Models */,
 				075593C11B8FA64B00A0BBF6 /* VCs */,
 				075593C31B8FA66300A0BBF6 /* Supporting Files */,
-				075593E21B8FABDE00A0BBF6 /* GlobalConstants.swift */,
-				075593E11B8FAB3000A0BBF6 /* Bridging-Header.h */,
 			);
 			path = FollowMeAudio;
 			sourceTree = SOURCE_ROOT;
@@ -143,6 +143,9 @@
 		075593C31B8FA66300A0BBF6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0723188F1B950C4400C3B2F9 /* LinearRegression.swift */,
+				075593E21B8FABDE00A0BBF6 /* GlobalConstants.swift */,
+				075593E11B8FAB3000A0BBF6 /* Bridging-Header.h */,
 				075593C71B8FA7C600A0BBF6 /* Audio */,
 				075593C61B8FA7BA00A0BBF6 /* Images */,
 				075593A81B8FA3D000A0BBF6 /* Images.xcassets */,
@@ -332,6 +335,7 @@
 				075593C01B8FA43F00A0BBF6 /* ItemsViewController.swift in Sources */,
 				0785560C1B8FE17C00FA0F6C /* SpeakerSelectionTableViewController.swift in Sources */,
 				075593BC1B8FA43A00A0BBF6 /* AddItemViewController.swift in Sources */,
+				072318901B950C4400C3B2F9 /* LinearRegression.swift in Sources */,
 				075593BD1B8FA43A00A0BBF6 /* AppDelegate.swift in Sources */,
 				075593E31B8FABDE00A0BBF6 /* GlobalConstants.swift in Sources */,
 			);

@@ -1,3 +1,11 @@
+//
+//  ItemCell.swift
+//  FollowMe
+//
+//  Created by Eric Tran on 8/27/15.
+//  Copyright (c) 2015 Harman International. All rights reserved.
+//
+
 import UIKit
 import CoreLocation
 

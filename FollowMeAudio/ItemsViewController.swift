@@ -1,3 +1,11 @@
+//
+//  ItemsViewController.swift
+//  FollowMe
+//
+//  Created by Eric Tran on 8/27/15.
+//  Copyright (c) 2015 Harman International. All rights reserved.
+//
+
 import UIKit
 import Foundation
 import CoreLocation
@@ -6,12 +14,14 @@ struct ItemsViewControllerConstant {
     static let storedItemsKey = "storedItems"
 }
 
+// Constant time to gather data for logistic regression
+let kSecondsToPoll = 5
+
 // White Box beacon major
 let kWhiteBoxMajor = 1001
 
 class ItemsViewController: UIViewController {
 
-    @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var itemsTableView: UITableView!
   
     let locationManager = CLLocationManager()
@@ -20,6 +30,7 @@ class ItemsViewController: UIViewController {
     var g_mp3Files = [String]()
     
     var nameToIndexes = [String: Int]()
+    var dataPoints = [regressionInput]();
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,27 +146,28 @@ class ItemsViewController: UIViewController {
     func searchBeacons(item: Item) {
         for (var i = 0; i < self.HKWControl.getDeviceCount(); i++) {
             var dInfo = self.HKWControl.getDeviceInfoByIndex(i)
+            println("DeviceName: \(dInfo.deviceName) | BeaconName: \(item.name)");
             if dInfo.deviceName == item.name {
-                println("Found a beacon to speaker match...")
-                println("Assigning \(i) to \(dInfo.deviceName)...")
+                println("Assigning speaker: \(dInfo.deviceName) w/ \(i)...")
                 self.nameToIndexes[dInfo.deviceName] = i
                 self.HKWControl.addDeviceToSession(dInfo.deviceId)
             }
             else {
-                println("Removing a speaker \(dInfo.deviceName) from session...")
+                println("Removing speaker: \(dInfo.deviceName) from session...")
+                self.nameToIndexes.removeValueForKey(dInfo.deviceName)
                 self.HKWControl.removeDeviceFromSession(dInfo.deviceId)
             }
         }
     }
     
     /* Helper method for determining which speaker - beacon is interacting and acts accordingly */
-    func checkBeacon(beacon:CLBeacon, index: Int, rssi: Float) {
+    func checkBeacon(beacon:CLBeacon, index: Int, rssi: Double) {
     
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
         if (beacon.proximity == CLProximity.Near || beacon.proximity == CLProximity.Immediate) {
             var volumeLvl = self.changeVolumeBasedOnRange(beacon)
             self.HKWControl.setVolumeDevice(self.HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
-            println("... Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl)");
+            println("... Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(rssi)");
     
             // If song isn't playing start playing it
             // if !self.HKWControl.isPlaying() {
@@ -182,7 +194,7 @@ class ItemsViewController: UIViewController {
     
         self.HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
         
-        // Alerts the user that music is being played
+        // Alerts the user  music is being played
         var g_alert = UIAlertController(title: "Playback", message: "Song is currently being played", preferredStyle: .Alert)
         g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
             self.dismissViewControllerAnimated(false, completion: nil)
@@ -277,13 +289,26 @@ extension ItemsViewController: CLLocationManagerDelegate {
                         self.searchBeacons(item)
                         
                         item.lastSeenBeacon = beacon
-                        
                         var speakerNdx = self.nameToIndexes[item.name];
-                        println("Index of speaker to be played from: \(speakerNdx)")
                         
-                        if (beacon.major.isEqualToNumber(kWhiteBoxMajor) && speakerNdx != -1) {
-                            println("Playing in speaker named \(item.name) with speakerNdx: \(speakerNdx)")
-                            self.checkBeacon(beacon, index: speakerNdx!, rssi: 0)
+                        if (beacon.major.isEqualToNumber(kWhiteBoxMajor) && speakerNdx != nil) {
+                            println("Playing in speaker: \(item.name) w/speakerNdx: \(speakerNdx)")
+                            
+                            //If still needs to gather data
+                            if (self.dataPoints.count < kSecondsToPoll) {
+                                self.dataPoints.append(regressionInput(xValue: Double(beacon.accuracy), yValue: Double(beacon.rssi)))
+                            }
+                            //Has enough data, start to do logarthimic interpolation
+                            else {
+                                var result = linearRegression(self.dataPoints)
+                                var newRSSI = (result.slope * Double(beacon.accuracy)) + result.intercept
+                                println("result: \(result)")
+                                
+                                self.checkBeacon(beacon, index: speakerNdx!, rssi: newRSSI)
+                                
+                                self.dataPoints.removeAtIndex(0)
+                                
+                            }
                         }
                     }
                 }

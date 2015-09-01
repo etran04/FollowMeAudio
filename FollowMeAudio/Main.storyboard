@@ -78,7 +78,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="itemsTableView" destination="Azx-eW-qGQ" id="yCS-eT-8Ci"/>
-                        <outlet property="stopBtn" destination="K5n-MS-KVB" id="NKk-xF-8J3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -98,8 +97,8 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5q-Gz-3zF">
-                                    <rect key="frame" x="155" y="8" width="291" height="30"/>
-                                    <state key="normal" title="Choose a speaker to pair with the iBeacon">
+                                    <rect key="frame" x="245" y="8" width="111" height="30"/>
+                                    <state key="normal" title="List of Speakers">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -232,7 +231,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Speaker_Cell" textLabel="HBw-7o-0uR" detailTextLabel="8Zi-Jd-0Q0" style="IBUITableViewCellStyleSubtitle" id="aux-am-bNe">
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Speaker_Cell" textLabel="HBw-7o-0uR" detailTextLabel="8Zi-Jd-0Q0" style="IBUITableViewCellStyleSubtitle" id="aux-am-bNe">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aux-am-bNe" id="9LX-Zl-9mZ">
                                     <autoresizingMask key="autoresizingMask"/>

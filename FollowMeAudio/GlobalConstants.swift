@@ -1,9 +1,9 @@
 //
 //  GlobalConstants.swift
-//  HKRules
+//  FollowMe
 //
-//  Created by Tyler Freckmann on 8/3/15.
-//  Copyright (c) 2015 Tyler Freckmann. All rights reserved.
+//  Created by Eric Tran on 8/27/15.
+//  Copyright (c) 2015 Harman International. All rights reserved.
 //
 
 import Foundation
