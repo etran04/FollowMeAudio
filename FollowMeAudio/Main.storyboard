@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n7t-Lm-RXF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--iBeacons-->
@@ -79,6 +78,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="itemsTableView" destination="Azx-eW-qGQ" id="yCS-eT-8Ci"/>
+                        <segue destination="soY-Lq-caU" kind="show" identifier="pairSpeakersSegue" id="O1O-W4-1QP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -169,7 +169,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQi-g5-oBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2zk-mf-Wvq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1810" y="1124"/>
+            <point key="canvasLocation" x="1962" y="1257"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="GKc-Lj-6ZY">
@@ -179,27 +179,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="HGy-gg-Zfy">
-                            <rect key="frame" x="0.0" y="196" width="600" height="38"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5q-Gz-3zF">
-                                    <rect key="frame" x="245" y="8" width="111" height="30"/>
-                                    <state key="normal" title="List of Speakers">
-                                        <color key="titleColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <segue destination="soY-Lq-caU" kind="show" id="uTs-da-hNi"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="u5q-Gz-3zF" firstAttribute="centerX" secondItem="HGy-gg-Zfy" secondAttribute="centerX" id="Pvv-uM-z3h"/>
-                                <constraint firstItem="u5q-Gz-3zF" firstAttribute="top" secondItem="HGy-gg-Zfy" secondAttribute="topMargin" id="om9-dr-7Ai"/>
-                            </constraints>
-                        </view>
                         <sections>
                             <tableViewSection id="D1P-9I-Gan">
                                 <cells>
@@ -350,7 +329,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OlB-9A-yKk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3308" y="424"/>
+            <point key="canvasLocation" x="597" y="1257"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JNi-fI-9gs">
@@ -426,7 +405,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaV-8X-ekP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2515" y="1124"/>
+            <point key="canvasLocation" x="2699" y="1257"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="m6G-zE-8lt">
@@ -444,7 +423,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bdp-4Q-SmG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1117" y="1124"/>
+            <point key="canvasLocation" x="1265" y="1257"/>
         </scene>
     </scenes>
     <resources>

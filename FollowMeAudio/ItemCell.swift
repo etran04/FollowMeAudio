@@ -61,8 +61,8 @@ class ItemCell: UITableViewCell {
         let proximity = nameForProximity(anItem.lastSeenBeacon!.proximity)
         let accuracy = NSString(format: "%.2f", anItem.lastSeenBeacon!.accuracy)
         let rssi = anItem.lastSeenBeacon!.rssi
-        detailTextLabel!.text = "Location: \(proximity) (approx. \(accuracy)m || rssi: \(rssi))"
-      }
+        let pairName = anItem.speakerPair
+        detailTextLabel!.text = "Location: \(proximity) || Distance: \(accuracy)m || RSII: \(rssi)) || Paired w/: \(pairName)"      }
     }
   }
 }

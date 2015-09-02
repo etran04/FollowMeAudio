@@ -41,6 +41,7 @@ class ItemsViewController: UIViewController {
     var dataPoints = [regressionInput]();
     
     var musicInfo: MusicInfo!
+    var currentItemNdx: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -318,7 +319,13 @@ extension ItemsViewController: UITableViewDelegate {
         let uuid = item.uuid.UUIDString
         let detailMessage = "UUID: \(uuid)\nMajor: \(item.majorValue)\nMinor: \(item.minorValue)"
         let detailAlert = UIAlertController(title: "Details", message: detailMessage, preferredStyle: .Alert)
-        detailAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        detailAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        detailAlert.addAction(UIAlertAction(title: "Pair speaker", style: .Default, handler: { action in
+            println("Showing pair speaker screen...")
+            self.currentItemNdx = indexPath.row
+            self.performSegueWithIdentifier("pairSpeakersSegue", sender: self)
+        }))
+
         self.presentViewController(detailAlert, animated: true, completion: nil)
     }
 }
