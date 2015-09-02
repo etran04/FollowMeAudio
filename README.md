@@ -13,7 +13,8 @@ HOW TO USE
 
 <br> 1) Go into app 'FollowMe'
 <br> 2) Press the '+' sign at the top right corner. 
-<br> 3) Input name, uuid, major, and minor value of beacons. (name has to match with speaker paired with)
+<br> 3) Input beacon information. (name has to match with speaker paired with)
+<br> <b> Click 'list of speakers' to see all available speakers on the network. </b> 
 <br> 4) See that beacon is registered. Should be updating location.  
 <br> 5) Press the 'settings' icon at the top left corner.
 <br> 6) Play song when ready. Alert will notify user song is playing. 
