@@ -15,7 +15,8 @@ HOW TO USE
 <br> 2) Press the '+' sign at the top right corner. 
 <br> 3) Input beacon information. (name has to match with speaker paired with)
 <br> <b> Click 'list of speakers' to see all available speakers on the network. </b> 
-<br> 4) See that beacon is registered.<br> 5) Press the 'settings' icon at the top left corner.
+<br> 4) See that beacon is registered. Location should be updating. 
+<br> 5) Press the 'settings' icon at the top left corner.
 <br> 6) Play song when ready. Alert will notify user song is playing. 
 <br><b> At this point, you can walk around and see Follow Me in action. </b>
 <br> 6) Stop song when ready. Alert will notify when song is stopped. 
