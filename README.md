@@ -14,11 +14,13 @@ HOW TO USE
 <br> 1) Go into app 'FollowMe'
 <br> 2) Press the '+' sign at the top right corner. 
 <br> 3) Input name, uuid, major, and minor value of beacons. (name has to match with speaker paired with)
-<br> 4) Walk into "Near" or "Immediate" vicinity 
+<br> 4) See that beacon is registered. Should be updating location.  
 <br> 5) Press the 'settings' icon at the top left corner.
-<br> 6) Configure settings to your preference. (Choose song or change volume offset)
-<br> 7) Click on 'Play Current Song'
-<br> 8) Walk around and see Follow Me in action. 
+<br> 6) Play song when ready. Alert will notify user song is playing. 
+<br><b> At this point, you can walk around and see Follow Me in action. </b>
+<br> 6) Stop song when ready. Alert will notify when song is stopped. 
+
+![Imgur](http://i.imgur.com/1Xd9HL2.png)
 
 FAQs
 ----
