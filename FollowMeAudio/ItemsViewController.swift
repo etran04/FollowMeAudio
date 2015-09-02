@@ -185,7 +185,7 @@ class ItemsViewController: UIViewController {
     }
     
     /* Helper method for determining which speaker - beacon is interacting and acts accordingly */
-    func checkBeaconAndPlay(beacon:CLBeacon, index: Int, rssi: Double) {
+    func checkBeaconAndAdjust(beacon:CLBeacon, index: Int, rssi: Double) {
     
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
         if (beacon.proximity == CLProximity.Near || beacon.proximity == CLProximity.Immediate) {
@@ -354,7 +354,7 @@ extension ItemsViewController: CLLocationManagerDelegate {
                             else {
                                 var result = linearRegression(dataPoints)
                                 var newRSSI = (result.slope * Double(beacon.accuracy)) + result.intercept
-                                checkBeaconAndPlay(beacon, index: speakerNdx!, rssi: newRSSI)
+                                checkBeaconAndAdjust(beacon, index: speakerNdx!, rssi: newRSSI)
                                 dataPoints.removeAtIndex(0)                                
                             }
                         }
