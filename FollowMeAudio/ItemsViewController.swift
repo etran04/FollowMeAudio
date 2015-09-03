@@ -152,6 +152,18 @@ class ItemsViewController: UIViewController {
         let songVC = segue.sourceViewController as! SettingsVC
         startPlayback()
     }
+    
+    @IBAction func savePairedSpeaker(segue: UIStoryboardSegue) {
+        let speakerVC = segue.sourceViewController as! SpeakerSelectionTableViewController
+        if (speakerVC.speakerName != nil) {
+            println("MainVC: Paired speaker name is \(speakerVC.speakerName)")
+            items[currentItemNdx].setSpeakerPairName(speakerVC.speakerName)
+            persistItems()
+        }
+        else {
+            println("MainVC: Tried to pair...")
+        }
+    }
   
     @IBAction func cancelItem(segue: UIStoryboardSegue) {
         // Do nothing

@@ -10,6 +10,8 @@ import UIKit
 
 class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEventHandlerDelegate {
     
+    var speakerName: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,13 +61,21 @@ class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEvent
         let cell = tableView.dequeueReusableCellWithIdentifier("Speaker_Cell", forIndexPath: indexPath) as! UITableViewCell
         var deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(indexPath.section, deviceIndex: indexPath.row)
         
-        if deviceInfo.active {
-            HKWControlHandler.sharedInstance().removeDeviceFromSession(deviceInfo.deviceId)
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        } else {
+        if !deviceInfo.active {
+            // Choosing an unpaired speaker
+            println("SpeakerSelectVC: Choosing an unpaired speaker...")
+            speakerName = deviceInfo.deviceName
+            println("SpeakerSelectVC: Pairing with speaker: \(deviceInfo.deviceName)")
             HKWControlHandler.sharedInstance().addDeviceToSession(deviceInfo.deviceId)
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            self.performSegueWithIdentifier("pairWithSpeaker", sender: self)
         }
+        /*if deviceInfo.active {
+        HKWControlHandler.sharedInstance().removeDeviceFromSession(deviceInfo.deviceId)
+        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        } else {
+        HKWControlHandler.sharedInstance().addDeviceToSession(deviceInfo.deviceId)
+        cell.accessoryType = UITableViewCellAccessoryType.None
+        }*/
     }
     
     func hkwDeviceStateUpdated(deviceId: Int64, withReason reason: Int) {
