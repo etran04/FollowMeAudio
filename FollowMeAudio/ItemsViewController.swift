@@ -177,7 +177,7 @@ class ItemsViewController: UIViewController {
      * If current speaker does not match, removes that speaker from playback session.
      */
     func searchBeacons(item: Item) {
-        for (var i = 0; i < HKWControl.getDeviceCount(); i++) {
+        for (var i = 0; i < HKWControl?.getDeviceCount(); i++) {
             var dInfo = HKWControl.getDeviceInfoByIndex(i)
             if dInfo.deviceName == item.name && !dInfo.active {
                 println("DeviceName: \(dInfo.deviceName) | BeaconName: \(item.name)");
