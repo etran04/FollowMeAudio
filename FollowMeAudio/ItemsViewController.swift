@@ -151,7 +151,6 @@ class ItemsViewController: UIViewController {
     }
     
     @IBAction func playSong(segue: UIStoryboardSegue) {
-        let songVC = segue.sourceViewController as! SettingsVC
         startPlayback()
     }
     
@@ -179,7 +178,7 @@ class ItemsViewController: UIViewController {
     func searchBeacons(item: Item) {
         for (var i = 0; i < HKWControl?.getDeviceCount(); i++) {
             var dInfo = HKWControl.getDeviceInfoByIndex(i)
-            if dInfo.deviceName == item.name && !dInfo.active {
+            if dInfo.deviceName == item.speakerPair && nameToIndexes[dInfo.deviceName] == nil {
                 println("DeviceName: \(dInfo.deviceName) | BeaconName: \(item.name)");
                 println("Assigning speaker: \(dInfo.deviceName) w/ \(i)...")
                 item.setIndex(i)
@@ -189,13 +188,29 @@ class ItemsViewController: UIViewController {
         }
     }
     
-    /* Helper method for removing speaker from session when removed from table */
-    func removeActiveSpeaker(item: Item) {
-        var i = nameToIndexes[item.name]?.speakerNdx
-        if i != nil {
-            HKWControl.removeDeviceFromSession(HKWControl.getDeviceInfoByIndex(i!).deviceId)
-            nameToIndexes.removeValueForKey(item.name)
-            println("Removing speaker: \(item.name) from session...")
+    
+    /* Helper method for removing all inactive beacon speaker pairs from session */
+    func clearUnpairedSpeakers() {
+        if items.count == 0 {
+            println("Removed all speakers from session")
+            for (var i = 0; i < HKWControl?.getDeviceCount(); i++) {
+                var dInfo = HKWControl.getDeviceInfoByIndex(i)
+                HKWControl.removeDeviceFromSession(dInfo.deviceId)
+                nameToIndexes.removeValueForKey(dInfo.deviceName)
+            }
+        }
+        else {
+            for (var i = 0; i < HKWControl?.getDeviceCount(); i++) {
+                var dInfo = HKWControl.getDeviceInfoByIndex(i)
+                for (var j = 0; j < items.count; j++) {
+                    var bInfo = items[j]
+                    if dInfo.deviceName != bInfo.speakerPair && dInfo.active{
+                        HKWControl.removeDeviceFromSession(dInfo.deviceId)
+                        nameToIndexes.removeValueForKey(dInfo.deviceName)
+                        println("Removing speaker: \(dInfo.deviceName) from session...")
+                    }
+                }
+            }
         }
     }
     
@@ -203,7 +218,7 @@ class ItemsViewController: UIViewController {
     func checkBeaconAndAdjust(beacon:CLBeacon, index: Int, rssi: Double) {
     
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
-        if (beacon.proximity == CLProximity.Near || beacon.proximity == CLProximity.Immediate) {
+        if (beacon.proximity == CLProximity.Immediate) {
             var volumeLvl = changeVolumeBasedOnRange(beacon)
             HKWControl.setVolumeDevice(HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
             println("Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(rssi)");
@@ -314,10 +329,10 @@ extension ItemsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let itemToRemove = items[indexPath.row] as Item
-            removeActiveSpeaker(itemToRemove)
             stopMonitoringItem(itemToRemove)
             tableView.beginUpdates()
             items.removeAtIndex(indexPath.row)
+            clearUnpairedSpeakers()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             tableView.endUpdates()
             persistItems()

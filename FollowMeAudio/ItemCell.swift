@@ -62,7 +62,7 @@ class ItemCell: UITableViewCell {
                 let accuracy = NSString(format: "%.2f", anItem.lastSeenBeacon!.accuracy)
                 let rssi = anItem.lastSeenBeacon!.rssi
                 let pairName = anItem.speakerPair
-                detailTextLabel!.text = "Location: \(proximity) || Distance: \(accuracy)m || RSII: \(rssi) || Paired w/: \(pairName)"
+                detailTextLabel!.text = "Location: \(proximity) || RSII: \(rssi) || Paired w/: \(pairName)"
             }
             else {
                 detailTextLabel!.text = "Location: Cannot be determined"
