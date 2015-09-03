@@ -143,8 +143,10 @@ class ItemsViewController: UIViewController {
         let songVC = segue.sourceViewController as! ChooseSoundTableViewController
         if let newSong = songVC.musicInfo {
             musicInfo = newSong
-            HKWControl.stop()
-            playStreamingWithPersistentID(musicInfo.defaultSong, persistentId: musicInfo.songPersistentID)
+            //HKWControl.stop()
+            //playStreamingWithPersistentID(musicInfo.defaultSong, persistentId: musicInfo.songPersistentID)
+            println("MainVC.saveSong: Play default song? \(musicInfo.defaultSong)")
+
         }
     }
     
