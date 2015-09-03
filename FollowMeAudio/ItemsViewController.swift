@@ -35,7 +35,6 @@ class ItemsViewController: UIViewController {
     let locationManager = CLLocationManager()
     var HKWControl: HKWControlHandler!
     var items: [Item] = []
-    var g_mp3Files = [String]()
     
     var nameToIndexes = [String: Item]()
     var dataPoints = [regressionInput]();
@@ -242,7 +241,7 @@ class ItemsViewController: UIViewController {
             var bundleRoot = NSBundle.mainBundle().bundlePath
             var dirContents: NSArray = NSFileManager.defaultManager().contentsOfDirectoryAtPath(bundleRoot, error: nil)!
             var fltr: NSPredicate = NSPredicate(format: "self ENDSWITH '.mp3'")
-            g_mp3Files = dirContents.filteredArrayUsingPredicate(fltr) as! [String]
+            var g_mp3Files = dirContents.filteredArrayUsingPredicate(fltr) as! [String]
     
             var assetURL = NSURL.fileURLWithPath(bundleRoot.stringByAppendingPathComponent(g_mp3Files[0]))
             println("NSURL: \(assetURL)")
@@ -380,7 +379,7 @@ extension ItemsViewController: CLLocationManagerDelegate {
                         item.lastSeenBeacon = beacon
                         
                         // There is an associated beacon to speaker pair
-                        var speakerNdx = nameToIndexes[item.name]?.speakerNdx;
+                        var speakerNdx = nameToIndexes[item.speakerPair]?.speakerNdx;
                         if speakerNdx != nil {
                             // If still needs to gather data
                             if (dataPoints.count < kSecondsToPoll) {
