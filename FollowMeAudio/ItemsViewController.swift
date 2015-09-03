@@ -87,6 +87,7 @@ class ItemsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
   
+    /* Loads preloads beacon information from previous runs into table when app starts */
     func loadItems() {
         if let storedItems = NSUserDefaults.standardUserDefaults().arrayForKey(ItemsViewControllerConstant.storedItemsKey) {
             for itemData in storedItems {
@@ -97,6 +98,7 @@ class ItemsViewController: UIViewController {
         }
     }
   
+    /* Saves beacon information for later application runs */
     func persistItems() {
         var itemsDataArray:[NSData] = []
         for item in items {

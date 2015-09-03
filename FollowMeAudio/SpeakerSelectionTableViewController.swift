@@ -69,13 +69,6 @@ class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEvent
             HKWControlHandler.sharedInstance().addDeviceToSession(deviceInfo.deviceId)
             self.performSegueWithIdentifier("pairWithSpeaker", sender: self)
         }
-        /*if deviceInfo.active {
-        HKWControlHandler.sharedInstance().removeDeviceFromSession(deviceInfo.deviceId)
-        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        } else {
-        HKWControlHandler.sharedInstance().addDeviceToSession(deviceInfo.deviceId)
-        cell.accessoryType = UITableViewCellAccessoryType.None
-        }*/
     }
     
     func hkwDeviceStateUpdated(deviceId: Int64, withReason reason: Int) {
