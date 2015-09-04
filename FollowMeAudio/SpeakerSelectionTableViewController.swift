@@ -67,7 +67,7 @@ class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEvent
             speakerName = deviceInfo.deviceName
             println("SpeakerSelectVC: Pairing with speaker: \(deviceInfo.deviceName)")
             HKWControlHandler.sharedInstance().addDeviceToSession(deviceInfo.deviceId)
-            self.performSegueWithIdentifier("pairWithSpeaker", sender: self)
+            self.performSegueWithIdentifier("finishPairWithSpeaker", sender: self)
         }
     }
     

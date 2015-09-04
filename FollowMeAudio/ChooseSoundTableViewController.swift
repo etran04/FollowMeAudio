@@ -24,6 +24,8 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
         
         musicInfo = MusicInfo()
         musicInfo.defaultSong = true
+        musicInfo.artist = "The Weeknd"
+        musicInfo.songName = "The Hills"
         musicInfo.songPersistentID = 0
     }
 
@@ -101,6 +103,8 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
         self.dismissViewControllerAnimated(true, completion: nil)
         let mediaItem = mediaItemCollection.items[0] as! MPMediaItem
         musicInfo.defaultSong = false;
+        musicInfo.artist = mediaItem.artist
+        musicInfo.songName = mediaItem.title
         musicInfo.songPersistentID = mediaItem.persistentID
     }
     
@@ -108,6 +112,7 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    /*
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -118,7 +123,7 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
             destVC.musicInfo = musicInfo
             println("in save song")
         }
-    }
+    }*/
 
 
 }

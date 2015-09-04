@@ -61,11 +61,11 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DCy-sT-ogh">
                                 <rect key="frame" x="16" y="7" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="settings.png">
+                                <state key="normal" image="settings">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="rTK-GN-y7r" kind="show" id="UDd-mt-LAC"/>
+                                    <segue destination="cCJ-Uo-b5L" kind="show" identifier="goToSettingsVC" id="QQv-qe-WcC"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -98,15 +98,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Volume offset: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR5-Ha-vxQ">
-                                <rect key="frame" x="218" y="126" width="164" height="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume offset: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR5-Ha-vxQ">
+                                <rect key="frame" x="132" y="337" width="188" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zX-Hm-TPm">
-                                <rect key="frame" x="189" y="416" width="222" height="30"/>
-                                <state key="normal" title="Play/Stop Current Song" image="play.png">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zX-Hm-TPm">
+                                <rect key="frame" x="246" y="507" width="109" height="30"/>
+                                <state key="normal" title="Play/Stop" image="play">
                                     <color key="titleColor" red="0.12156862745098039" green="0.69411764705882351" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -114,8 +114,12 @@
                                     <segue destination="Q6G-Wl-4Oy" kind="unwind" unwindAction="playSong:" id="slf-b5-Yue"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-WH-K4M">
-                                <rect key="frame" x="234" y="364" width="133" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-WH-K4M">
+                                <rect key="frame" x="234" y="88" width="133" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0Zy-1z-QWv"/>
+                                    <constraint firstAttribute="width" constant="133" id="rEK-7s-dBS"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Choose Song">
                                     <color key="titleColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -126,8 +130,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpQ-Um-w0o">
-                                <rect key="frame" x="337" y="196" width="30" height="46"/>
-                                <state key="normal" image="greenUp.png">
+                                <rect key="frame" x="457" y="332" width="30" height="46"/>
+                                <state key="normal" image="greenUp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -135,41 +139,73 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWn-EP-LT8">
-                                <rect key="frame" x="234" y="196" width="30" height="46"/>
-                                <state key="normal" image="redDown.png">
+                                <rect key="frame" x="387" y="332" width="30" height="46"/>
+                                <state key="normal" image="redDown">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="volumeDownPressed:" destination="cCJ-Uo-b5L" eventType="touchUpInside" id="MGt-Qs-VcN"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhP-8Y-FNp">
+                                <rect key="frame" x="137" y="274" width="154" height="34"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="29"/>
+                                <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPy-VC-9UG">
+                                <rect key="frame" x="137" y="222" width="66" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Song" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxt-9h-oEB">
+                                <rect key="frame" x="366" y="280" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-gG-ev1">
+                                <rect key="frame" x="366" y="229" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="TpQ-Um-w0o" secondAttribute="centerY" constant="81" id="24T-FX-o8D"/>
-                            <constraint firstAttribute="centerX" secondItem="TpQ-Um-w0o" secondAttribute="centerX" constant="-52" id="663-N5-esq"/>
-                            <constraint firstAttribute="centerX" secondItem="0zX-Hm-TPm" secondAttribute="centerX" id="7QN-r6-0PG"/>
-                            <constraint firstAttribute="centerY" secondItem="CWn-EP-LT8" secondAttribute="centerY" constant="81" id="EBI-V7-bTW"/>
-                            <constraint firstAttribute="centerX" secondItem="eR5-Ha-vxQ" secondAttribute="centerX" id="G9z-ol-sFz"/>
-                            <constraint firstAttribute="centerY" secondItem="0zX-Hm-TPm" secondAttribute="centerY" constant="-131" id="HPM-Th-kXJ"/>
-                            <constraint firstItem="0zX-Hm-TPm" firstAttribute="top" secondItem="B9B-WH-K4M" secondAttribute="bottom" constant="22" id="U3b-lh-O3r"/>
-                            <constraint firstAttribute="centerX" secondItem="B9B-WH-K4M" secondAttribute="centerX" constant="-0.5" id="Vr0-Hq-1gY"/>
-                            <constraint firstItem="CWn-EP-LT8" firstAttribute="top" secondItem="eR5-Ha-vxQ" secondAttribute="bottom" constant="36" id="eb3-jF-D42"/>
-                            <constraint firstItem="TpQ-Um-w0o" firstAttribute="top" secondItem="eR5-Ha-vxQ" secondAttribute="bottom" constant="36" id="oIo-3k-FuP"/>
-                            <constraint firstAttribute="centerX" secondItem="CWn-EP-LT8" secondAttribute="centerX" constant="51" id="rJP-aa-X7C"/>
-                            <constraint firstAttribute="centerY" secondItem="B9B-WH-K4M" secondAttribute="centerY" constant="-79" id="w4L-aE-gvp"/>
-                            <constraint firstAttribute="centerY" secondItem="eR5-Ha-vxQ" secondAttribute="centerY" constant="157" id="wOa-Dq-v9V"/>
+                            <constraint firstAttribute="centerX" secondItem="pxt-9h-oEB" secondAttribute="centerX" constant="-117.5" id="0Df-lY-cNn"/>
+                            <constraint firstAttribute="centerY" secondItem="vhP-8Y-FNp" secondAttribute="centerY" constant="9" id="1Td-Bm-p3u"/>
+                            <constraint firstAttribute="centerX" secondItem="Gle-gG-ev1" secondAttribute="centerX" constant="-111.5" id="66Z-LL-Arp"/>
+                            <constraint firstAttribute="centerX" secondItem="B9B-WH-K4M" secondAttribute="centerX" constant="-0.5" id="801-ej-yiY"/>
+                            <constraint firstAttribute="centerY" secondItem="CWn-EP-LT8" secondAttribute="centerY" constant="-54.5" id="DYm-Gd-Rco"/>
+                            <constraint firstItem="0zX-Hm-TPm" firstAttribute="centerX" secondItem="079-iQ-7UV" secondAttribute="centerX" id="DzX-4n-Onv"/>
+                            <constraint firstAttribute="centerX" secondItem="CWn-EP-LT8" secondAttribute="centerX" constant="-102" id="FHb-ZO-Pah"/>
+                            <constraint firstAttribute="centerY" secondItem="Gle-gG-ev1" secondAttribute="centerY" constant="60.5" id="IRY-DB-Oxh"/>
+                            <constraint firstItem="B9B-WH-K4M" firstAttribute="top" secondItem="tSh-Qd-8pB" secondAttribute="bottom" constant="24" id="KFh-88-9nf"/>
+                            <constraint firstAttribute="centerX" secondItem="TpQ-Um-w0o" secondAttribute="centerX" constant="-172" id="MOI-kz-HjS"/>
+                            <constraint firstAttribute="centerY" secondItem="pxt-9h-oEB" secondAttribute="centerY" constant="9.5" id="Mso-zP-c1D"/>
+                            <constraint firstAttribute="centerY" secondItem="sPy-VC-9UG" secondAttribute="centerY" constant="60.5" id="MuR-0e-ctS"/>
+                            <constraint firstAttribute="centerX" secondItem="eR5-Ha-vxQ" secondAttribute="centerX" constant="74" id="Ngb-Jh-fPG"/>
+                            <constraint firstAttribute="centerX" secondItem="vhP-8Y-FNp" secondAttribute="centerX" constant="86.5" id="ZcG-q2-2Ez"/>
+                            <constraint firstAttribute="centerX" secondItem="sPy-VC-9UG" secondAttribute="centerX" constant="130" id="apF-bp-DxF"/>
+                            <constraint firstItem="DTd-Iz-ZkR" firstAttribute="top" secondItem="0zX-Hm-TPm" secondAttribute="bottom" constant="63" id="dY6-oz-PXq"/>
+                            <constraint firstAttribute="centerY" secondItem="TpQ-Um-w0o" secondAttribute="centerY" constant="-54.5" id="oD8-sf-Ojs"/>
+                            <constraint firstAttribute="centerY" secondItem="eR5-Ha-vxQ" secondAttribute="centerY" constant="-54.5" id="uvl-mV-mbR"/>
+                            <constraint firstItem="0zX-Hm-TPm" firstAttribute="centerX" secondItem="B9B-WH-K4M" secondAttribute="centerX" id="v6P-e4-fiu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="rVR-7L-hJO"/>
                     <connections>
+                        <outlet property="artistName" destination="Gle-gG-ev1" id="Dl2-m8-xdI"/>
+                        <outlet property="songNameLabel" destination="pxt-9h-oEB" id="6tS-K0-SIV"/>
                         <outlet property="volumeLabel" destination="eR5-Ha-vxQ" id="Eww-Wb-WwR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQi-g5-oBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2zk-mf-Wvq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1962" y="1257"/>
+            <point key="canvasLocation" x="1976" y="1277"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="GKc-Lj-6ZY">
@@ -274,7 +310,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="oHE-Zo-MUJ">
                             <color key="tintColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="o5x-DE-Rf9" kind="unwind" identifier="SaveItemSegue" unwindAction="saveItem:" id="KtJ-Vo-QsG"/>
+                                <segue destination="o5x-DE-Rf9" kind="unwind" identifier="" unwindAction="saveItem:" id="KtJ-Vo-QsG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -291,10 +327,10 @@
             </objects>
             <point key="canvasLocation" x="2620" y="424"/>
         </scene>
-        <!--Speaker Selection Table View Controller-->
+        <!--Speakers-->
         <scene sceneID="a4l-vh-oGU">
             <objects>
-                <tableViewController id="soY-Lq-caU" customClass="SpeakerSelectionTableViewController" customModule="FollowMe" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Speakers" id="soY-Lq-caU" customClass="SpeakerSelectionTableViewController" customModule="FollowMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" autoresizesSubviews="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="wlt-Xi-ZgT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,7 +356,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Q6G-Wl-4Oy" kind="unwind" identifier="pairWithSpeaker" unwindAction="savePairedSpeaker:" id="Z2W-lV-dzG"/>
+                                    <segue destination="Q6G-Wl-4Oy" kind="unwind" identifier="finishPairWithSpeaker" unwindAction="savePairedSpeaker:" id="Z2W-lV-dzG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -396,7 +432,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pgr-rT-7q0">
                                 <rect key="frame" x="451" y="7" width="30" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="save.png">
+                                <state key="normal" image="save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -410,30 +446,12 @@
             </objects>
             <point key="canvasLocation" x="2699" y="1257"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="m6G-zE-8lt">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rTK-GN-y7r" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mce-ID-YII">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="cCJ-Uo-b5L" kind="relationship" relationship="rootViewController" id="SX7-xL-HNI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bdp-4Q-SmG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1265" y="1257"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="greenUp.png" width="30" height="46"/>
-        <image name="play.png" width="30" height="30"/>
-        <image name="redDown.png" width="30" height="46"/>
-        <image name="save.png" width="30" height="29"/>
-        <image name="settings.png" width="30" height="30"/>
+        <image name="greenUp" width="30" height="46"/>
+        <image name="play" width="30" height="30"/>
+        <image name="redDown" width="30" height="46"/>
+        <image name="save" width="30" height="29"/>
+        <image name="settings" width="30" height="30"/>
     </resources>
 </document>

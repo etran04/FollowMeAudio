@@ -17,6 +17,8 @@ struct ItemsViewControllerConstant {
 
 struct MusicInfo {
     var defaultSong: Bool!
+    var artist: String!
+    var songName: String!
     var songPersistentID: MPMediaEntityPersistentID!
 }
 
@@ -50,6 +52,8 @@ class ItemsViewController: UIViewController {
         
         musicInfo = MusicInfo()
         musicInfo.defaultSong = true;
+        musicInfo.artist = "The Weeknd"
+        musicInfo.songName = "The Hills"
         musicInfo.songPersistentID = 0;
     }
     
@@ -81,7 +85,11 @@ class ItemsViewController: UIViewController {
                 
             })
         }
+        
+        // Clear unpaired speakers if neccesary (Used to clear after pairing beacon to different speaker)
+        clearUnpairedSpeakers()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -219,15 +227,16 @@ class ItemsViewController: UIViewController {
     func checkBeaconAndAdjust(beacon:CLBeacon, index: Int, rssi: Double) {
     
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
-        if (beacon.proximity == CLProximity.Immediate) {
+        if (beacon.proximity == CLProximity.Immediate) { // || beacon.proximity == CLProximity.Near {
             var volumeLvl = changeVolumeBasedOnRange(beacon)
             HKWControl.setVolumeDevice(HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
             println("Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(rssi)");
     
-            // If song isn't playing start playing it
+            // Uncomment if you want app to start playing automatically when in range of beacons
+            //
             // if !self.HKWControl.isPlaying() {
             //    playStreamingWithPersistentID(false, 0)
-            //}
+            // }
         }
         // If beacon is 'Far' or 'Unknown' (out of reach), turn down the volume of that speaker to 0
         else {
@@ -307,6 +316,18 @@ class ItemsViewController: UIViewController {
         }
         
         return volume;
+    }
+    
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "goToSettingsVC" {
+            let destVC = segue.destinationViewController as! SettingsVC
+            destVC.musicInfo = musicInfo
+            println("Passed current song info")
+        }
     }
 }
 
@@ -410,5 +431,7 @@ extension ItemsViewController: HKWPlayerEventHandlerDelegate {
         }
     }
 }
+
+
 
 

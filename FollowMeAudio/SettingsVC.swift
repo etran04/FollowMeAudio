@@ -12,7 +12,9 @@ import Foundation
 class SettingsVC: UIViewController {
 
     var musicInfo: MusicInfo!
-    
+
+    @IBOutlet weak var artistName: UILabel!
+    @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var volumeLabel: UILabel!
     
     override func viewDidLoad() {
@@ -22,6 +24,14 @@ class SettingsVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         volumeLabel.text = "Volume offset: " + String(volumeOffset)
+        if musicInfo != nil {
+            artistName.text = musicInfo.artist
+            songNameLabel.text = musicInfo.songName
+        }
+        else{
+            artistName.text = "The Weeknd"
+            songNameLabel.text = "The Hills"
+        }
     }
     
     @IBAction func volumeUpPressed(sender: UIButton) {
