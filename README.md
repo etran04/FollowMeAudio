@@ -6,13 +6,11 @@ Currently functionality:
 - When 'Far', volume of associated speaker will drop to 0. 
 - Implemented a linear regression algorithm. Current taking a set of k data points to calculate a more accurate rssi value to base the new volume off of. Polls for one second after, creating a new best fit line to approximate the next volume level. 
 
-
 HOW TO USE
 ----------
 
 For the purpose of this use case, we will be ignoring custom settings (volume offset, song selection)
 <br> This scenario will run the default song (The Hills by The Weeknd @ volume offset: 0)
-
 <br> 1) Go into app 'FollowMe'
 <br> 2) Press the '+' sign at the top right corner. 
 <br> 3) Input beacon information.
