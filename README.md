@@ -22,7 +22,7 @@ For the purpose of this use case, we will be ignoring custom settings (volume of
 <br> 8) Play song when ready. Alert will notify user song is playing. 
 <br> 9) Stop song when ready. Alert will notify when song is stopped. 
 
-![Imgur](http://i.imgur.com/1Xd9HL2.png)
+![Imgur](http://i.imgur.com/hdO3fFL.png)
 
 FAQs
 ----
