@@ -22,9 +22,6 @@ struct MusicInfo {
     var songPersistentID: MPMediaEntityPersistentID!
 }
 
-// Constant time to gather data for logistic regression
-let kSecondsToPoll = 5
-
 // User inputted level
 var volumeOffset = 0
 
@@ -39,7 +36,6 @@ class ItemsViewController: UIViewController {
     var items: [Item] = []
     
     var nameToIndexes = [String: Item]()
-    var dataPoints = [regressionInput]();
     
     var musicInfo: MusicInfo!
     var currentItemNdx: Int!
@@ -168,6 +164,7 @@ class ItemsViewController: UIViewController {
         if (speakerVC.speakerName != nil) {
             println("MainVC: Paired speaker name is \(speakerVC.speakerName)")
             items[currentItemNdx].setSpeakerPairName(speakerVC.speakerName)
+            clearUnpairedSpeakers()
             persistItems()
         }
         else {
@@ -224,13 +221,13 @@ class ItemsViewController: UIViewController {
     }
     
     /* Helper method for determining which speaker - beacon is interacting and acts accordingly */
-    func checkBeaconAndAdjust(beacon:CLBeacon, index: Int, rssi: Double) {
+    func checkBeaconAndAdjust(beacon:CLBeacon, index: Int) {
     
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
         if (beacon.proximity == CLProximity.Immediate) { // || beacon.proximity == CLProximity.Near {
             var volumeLvl = changeVolumeBasedOnRange(beacon)
             HKWControl.setVolumeDevice(HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
-            println("Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(rssi)");
+            println("Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(beacon.rssi)");
     
             // Uncomment if you want app to start playing automatically when in range of beacons
             //
@@ -404,17 +401,7 @@ extension ItemsViewController: CLLocationManagerDelegate {
                         // There is an associated beacon to speaker pair
                         var speakerNdx = nameToIndexes[item.speakerPair]?.speakerNdx;
                         if speakerNdx != nil {
-                            // If still needs to gather data
-                            if (dataPoints.count < kSecondsToPoll) {
-                                dataPoints.append(regressionInput(xValue: Double(beacon.accuracy), yValue: Double(beacon.rssi)))
-                            }
-                            // Has enough data, start to do linear interpolation
-                            else {
-                                var result = linearRegression(dataPoints)
-                                var newRSSI = (result.slope * Double(beacon.accuracy)) + result.intercept
-                                checkBeaconAndAdjust(beacon, index: speakerNdx!, rssi: newRSSI)
-                                dataPoints.removeAtIndex(0)                                
-                            }
+                            checkBeaconAndAdjust(beacon, index: speakerNdx!)
                         }
                     }
                 }
