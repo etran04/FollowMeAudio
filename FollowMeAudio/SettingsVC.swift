@@ -49,4 +49,12 @@ class SettingsVC: UIViewController {
             println("VolumeOffset: \(volumeOffset)")
         }
     }
+    
+    @IBAction func saveSong(segue: UIStoryboardSegue) {
+        let songVC = segue.sourceViewController as! ChooseSoundTableViewController
+        if let newSong = songVC.musicInfo {
+            musicInfo = newSong
+            println("MainVC.saveSong: Play default song? \(musicInfo.defaultSong)")
+        }
+    }
 }

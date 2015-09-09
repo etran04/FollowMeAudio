@@ -36,6 +36,7 @@ class ItemCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         item = nil
+        detailTextLabel!.text = "Location: Unknown"
     }
   
     override func setSelected(selected: Bool, animated: Bool) {

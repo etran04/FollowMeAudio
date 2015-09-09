@@ -40,6 +40,9 @@ class ItemsViewController: UIViewController {
     var musicInfo: MusicInfo!
     var currentItemNdx: Int!
     
+    var playFlag = false
+    var stopFlag = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -54,11 +57,9 @@ class ItemsViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        var g_alert: UIAlertController!
-        
         if !HKWControlHandler.sharedInstance().isInitialized() {
             // show the network initialization dialog
-            g_alert = UIAlertController(title: "Initializing", message: "If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.", preferredStyle: .Alert)
+            self.g_alert = UIAlertController(title: "Initializing", message: "If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.", preferredStyle: .Alert)
             
             self.presentViewController(g_alert, animated: true, completion: nil)
         }
@@ -75,15 +76,32 @@ class ItemsViewController: UIViewController {
                 self.HKWControl = HKWControlHandler.sharedInstance()
 
                 // dismiss the network initialization dialog
-                if g_alert != nil {
-                    g_alert.dismissViewControllerAnimated(true, completion: nil)
+                if self.g_alert != nil {
+                    self.g_alert.dismissViewControllerAnimated(true, completion: nil)
                 }
                 
             })
         }
         
-        // Clear unpaired speakers if neccesary (Used to clear after pairing beacon to different speaker)
-        clearUnpairedSpeakers()
+        if playFlag {
+            // Alerts the user  music is being played
+            g_alert = UIAlertController(title: "Playback", message: "Song is currently being played", preferredStyle: .Alert)
+            g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
+                self.dismissViewControllerAnimated(false, completion: nil)
+            }))
+            self.presentViewController(g_alert, animated: false, completion: nil)
+            playFlag = false
+        }
+        
+        if stopFlag {
+            // Alerts the user  music is being stopped
+            g_alert = UIAlertController(title: "Stopped", message: "Song is stopped", preferredStyle: .Alert)
+            g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
+                self.dismissViewControllerAnimated(false, completion: nil)
+            }))
+            self.presentViewController(g_alert, animated: false, completion: nil)
+            stopFlag = false
+        }
     }
     
     
@@ -144,18 +162,11 @@ class ItemsViewController: UIViewController {
         }
     }
     
-    @IBAction func saveSong(segue: UIStoryboardSegue) {
-        let songVC = segue.sourceViewController as! ChooseSoundTableViewController
+    @IBAction func playSong(segue: UIStoryboardSegue) {
+        let songVC = segue.sourceViewController as! SettingsVC
         if let newSong = songVC.musicInfo {
             musicInfo = newSong
-            //HKWControl.stop()
-            //playStreamingWithPersistentID(musicInfo.defaultSong, persistentId: musicInfo.songPersistentID)
-            println("MainVC.saveSong: Play default song? \(musicInfo.defaultSong)")
-
         }
-    }
-    
-    @IBAction func playSong(segue: UIStoryboardSegue) {
         startPlayback()
     }
     
@@ -266,25 +277,14 @@ class ItemsViewController: UIViewController {
             var assetURL = item.assetURL
             HKWControl.playCAF(assetURL, songName: item.title, resumeFlag: false)
         }
-        
-        // Alerts the user  music is being played
-        g_alert = UIAlertController(title: "Playback", message: "Song is currently being played", preferredStyle: .Alert)
-        g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
-            self.dismissViewControllerAnimated(false, completion: nil)
-        }))
-        self.presentViewController(g_alert, animated: false, completion: nil)
+        playFlag = true;
     }
     
     /* Helper method for quick playback and stopping of current played track */
     func startPlayback() {
         if HKWControl.isPlaying() {
             HKWControl.stop()
-            // Alerts the user music playback stopped
-            g_alert = UIAlertController(title: "Stopped", message: "Song is stopped", preferredStyle: .Alert)
-            g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
-                self.dismissViewControllerAnimated(false, completion: nil)
-            }))
-            self.presentViewController(g_alert, animated: false, completion: nil)
+            stopFlag = true
             println("Stopped playing...")
         }
         else {
@@ -324,6 +324,9 @@ class ItemsViewController: UIViewController {
             let destVC = segue.destinationViewController as! SettingsVC
             destVC.musicInfo = musicInfo
             println("Passed current song info")
+        }
+        else if segue.identifier == "playSongSegue" {
+            println("play song segue worked")
         }
     }
 }
