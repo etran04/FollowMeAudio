@@ -4,7 +4,6 @@ Integrate iBeacons with HKWireless SDK in order to ultimately create "Follow Me 
 Currently functionality: 
 - Able to start wake up from sleep and start playing music when in 'Near' or 'Immediate' vicinity of either speakers. 
 - When 'Far', volume of associated speaker will drop to 0. 
-- Implemented a linear regression algorithm. Current taking a set of k data points to calculate a more accurate rssi value to base the new volume off of. Polls for one second after, creating a new best fit line to approximate the next volume level. 
 
 HOW TO USE
 ----------
