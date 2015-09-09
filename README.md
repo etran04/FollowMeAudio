@@ -16,7 +16,7 @@ The most difficult part of this project was a feature I haven't finished impleme
 
 ACCOMPLISHMENTS I AM PROUD OF
 ----------------------------
-THe code was originally written in Objective C. Porting it to Swift made it feel more clean and looked asthetically more pleasing. I'm happy to say that if the beacons are placed in prime locations (spread out/not within each other proximity), Follow Me Audio works really well. 
+The code was originally written in Objective C. Porting it to Swift made it feel more clean and looked asthetically more pleasing. I'm happy to say that if the beacons are placed in prime locations (spread out/not within each other proximity), Follow Me Audio works really well. I'm also pleased to say I really enjoyed working on the front end user interface, such as the color theme, button placement, and how user interaction was handled. 
 
 HOW TO USE
 ----------
