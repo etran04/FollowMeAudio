@@ -178,9 +178,6 @@ class ItemsViewController: UIViewController {
             clearUnpairedSpeakers()
             persistItems()
         }
-        else {
-            println("MainVC: Tried to pair...")
-        }
     }
   
     @IBAction func cancelItem(segue: UIStoryboardSegue) {
@@ -245,6 +242,7 @@ class ItemsViewController: UIViewController {
             // if !self.HKWControl.isPlaying() {
             //    playStreamingWithPersistentID(false, 0)
             // }
+            
         }
         // If beacon is 'Far' or 'Unknown' (out of reach), turn down the volume of that speaker to 0
         else {
@@ -276,6 +274,8 @@ class ItemsViewController: UIViewController {
             let item = query.items.first as! MPMediaItem
             var assetURL = item.assetURL
             HKWControl.playCAF(assetURL, songName: item.title, resumeFlag: false)
+            
+            println("Playing \(item.title) from library")
         }
         playFlag = true;
     }
@@ -313,21 +313,6 @@ class ItemsViewController: UIViewController {
         }
         
         return volume;
-    }
-    
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "goToSettingsVC" {
-            let destVC = segue.destinationViewController as! SettingsVC
-            destVC.musicInfo = musicInfo
-            println("Passed current song info")
-        }
-        else if segue.identifier == "playSongSegue" {
-            println("play song segue worked")
-        }
     }
 }
 
@@ -418,6 +403,8 @@ extension ItemsViewController: HKWPlayerEventHandlerDelegate {
     func hkwPlayEnded() {
         if g_alert != nil {
             g_alert.dismissViewControllerAnimated(false, completion: nil)
+            playFlag = false
+            stopFlag = false
         }
     }
 }

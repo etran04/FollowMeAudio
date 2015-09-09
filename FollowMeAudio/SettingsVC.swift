@@ -54,7 +54,7 @@ class SettingsVC: UIViewController {
         let songVC = segue.sourceViewController as! ChooseSoundTableViewController
         if let newSong = songVC.musicInfo {
             musicInfo = newSong
-            println("MainVC.saveSong: Play default song? \(musicInfo.defaultSong)")
+            println("SettingsVC.saveSong: Play default song? \(musicInfo.defaultSong)")
         }
     }
 }
