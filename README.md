@@ -1,15 +1,27 @@
-#FollowMeAudio
+#Follow Me Audio
 Integrate iBeacons with HKWireless SDK in order to ultimately create "Follow Me Audio"
 
-Currently functionality: 
+WHAT IT DOES
+------------
+Follow Me Audio is proximity based audio playback using iBeacons with the Harman SDK. It allows for continious audio playback from location to location. The idea is to place iBeacons within or near Harman OMNI speakers, and then have the iPhone keep track of each iBeacon and adjust audio playback, based on the user's location from each iBeacon. 
+
+CURRENT FUNCTIONALITY
+---------------------
 - Able to start wake up from sleep and start playing music when in 'Near' or 'Immediate' vicinity of either speakers. 
 - When 'Far', volume of associated speaker will drop to 0. 
 
+CHALLENGES I FACED
+------------------
+The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and not exact distance indicators, so there had be some form of appoximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (through [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
+
+ACCOMPLISHMENTS I AM PROUD OF
+----------------------------
+THe code was originally written in Objective C. Porting it to Swift made it feel more clean and looked asthetically more pleasing. I'm happy to say that if the beacons are placed in prime locations (spread out/not within each other proximity), Follow Me Audio works really well. 
+
 HOW TO USE
 ----------
-
 For the purpose of this use case, we will be ignoring custom settings (volume offset, song selection)
-<br> This scenario will run the default song (The Hills by The Weeknd @ volume offset: 0)
+<br>This scenario will run the default song (The Hills by The Weeknd @ volume offset: 0)
 
 <br> 1) Go into app 'FollowMe'
 <br> 2) Press the '+' sign at the top right corner. 
@@ -26,7 +38,6 @@ For the purpose of this use case, we will be ignoring custom settings (volume of
 
 FAQs
 ----
-
 <b> Q. What speaker is connected to which beacon? </b>
 
 Underneath a a Beacon cell contains all the beacon information. The speaker that the beacon is paired with is under "Paired with: ..."
@@ -39,7 +50,6 @@ When a user clicks on a beacon, an option to 'Pair Speaker' will be available. T
 
 My solution is to delete the 'Derived Data' project in the folder, and do a fresh clean build, then compile.
 
-DISCLAIMER
+TO DO LIST
 ---------
-
-Still a work in progress. Would love to figure out some way of smoothing RSSI value out to have a seamless audio control functionality. 
+- Implement Levenberg-Marquardt to smooth out RSSI values for volume control based on actual distance 
