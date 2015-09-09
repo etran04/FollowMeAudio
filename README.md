@@ -11,18 +11,19 @@ HOW TO USE
 
 For the purpose of this use case, we will be ignoring custom settings (volume offset, song selection)
 <br> This scenario will run the default song (The Hills by The Weeknd @ volume offset: 0)
+
 <br> 1) Go into app 'FollowMe'
 <br> 2) Press the '+' sign at the top right corner. 
-<br> 3) Input beacon information.
+<br> 3) Input beacon information, then press save.
 <br> 4) See that beacon is registered. Location should be updating. 
 <br> 5) Pair the beacon to a speaker by clicking on the beacon, and then 'Pair Speaker'
-<br> 6) Select an inactive speaker from the list of speakers.
+<br> 6) Select an inactive speaker from the list of speakers. (Chose 'eric' in the diagram)
 <br> 7) See that the beacon is paired with the intended speaker.
-<br> 7) Press the 'settings' icon at the top left corner.
-<br> 8) Play song when ready. Alert will notify user song is playing. 
-<br> 9) Stop song when ready. Alert will notify when song is stopped. 
+<br> 8) Press the 'settings' icon at the top left corner.
+<br> 9) Play song when ready. Alert will notify user song is playing. 
+<br> 10) Stop song when ready. Alert will notify when song is stopped. 
 
-![Imgur](http://i.imgur.com/1Xd9HL2.png)
+![Imgur](http://i.imgur.com/7u7zRaw.png)
 
 FAQs
 ----
