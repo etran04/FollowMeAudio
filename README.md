@@ -1,4 +1,4 @@
-#Follow Me Audio
+#FOLLOW ME AUDIO
 Integrate iBeacons with HKWireless SDK in order to ultimately create "Follow Me Audio"
 
 WHAT IT DOES
@@ -16,7 +16,7 @@ The most difficult part of this project was a feature I haven't finished impleme
 
 ACCOMPLISHMENTS I AM PROUD OF
 ----------------------------
-The code was originally written in Objective C. Porting it to Swift made it feel more clean and looked asthetically more pleasing. I'm happy to say that if the beacons are placed in prime locations (spread out/not within each other proximity), Follow Me Audio works really well. I'm also pleased to say I really enjoyed working on the front end user interface, such as the color theme, button placement, and how user interaction was handled. 
+The code was originally written in Objective C. Porting it to Swift made it feel more clean and looked asthetically more pleasing. I'm happy to say that if the beacons are placed in prime locations (spread out/not within each other proximity), Follow Me Audio works really well. I'm also happy to say it looks decent for a first iOS project. I really enjoyed working on the front end user interface, such as the color theme, button placement, and how user interaction was handled. There's still plenty to be done, but overall, it was a good experience developing this and playing around with iBeacons and Harman SDK.
 
 HOW TO USE
 ----------
