@@ -58,6 +58,7 @@
 		075593DF1B8FAAE400A0BBF6 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		075593E11B8FAB3000A0BBF6 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		075593E21B8FABDE00A0BBF6 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		077556E51BA20AFF005CF686 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0785560B1B8FE17C00FA0F6C /* SpeakerSelectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerSelectionTableViewController.swift; sourceTree = "<group>"; };
 		FB9CC9561AD701910038DF33 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB9CC96B1AD701910038DF33 /* FollowMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FollowMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +94,7 @@
 		075593A01B8FA31000A0BBF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				077556E51BA20AFF005CF686 /* CoreBluetooth.framework */,
 				075593DF1B8FAAE400A0BBF6 /* libbz2.dylib */,
 				075593DD1B8FAADF00A0BBF6 /* libz.dylib */,
 				FB9CC97B1AD701CF0038DF33 /* CoreGraphics.framework */,

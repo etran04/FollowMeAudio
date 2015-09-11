@@ -108,12 +108,8 @@
                                     <segue destination="Q6G-Wl-4Oy" kind="unwind" identifier="playSongSegue" unwindAction="playSong:" id="slf-b5-Yue"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-WH-K4M">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9B-WH-K4M">
                                 <rect key="frame" x="234" y="469" width="133" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="133" id="1CX-sj-jPV"/>
-                                    <constraint firstAttribute="height" constant="30" id="66r-p9-Qtv"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Choose Song">
                                     <color key="titleColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -123,99 +119,51 @@
                                     <segue destination="sK4-KJ-Hfv" kind="show" id="g6e-kW-CL6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhP-8Y-FNp">
-                                <rect key="frame" x="134" y="134" width="173" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="4vy-La-rvP"/>
-                                    <constraint firstAttribute="width" constant="173" id="9sT-Cv-rmb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Song Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhP-8Y-FNp">
+                                <rect key="frame" x="133" y="220" width="173" height="39"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                 <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPy-VC-9UG">
-                                <rect key="frame" x="134" y="86" width="79" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="79" id="hQm-f5-trX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPy-VC-9UG">
+                                <rect key="frame" x="133" y="172" width="79" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Song" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxt-9h-oEB">
-                                <rect key="frame" x="343" y="139" width="138" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="GC1-Ln-zeJ"/>
-                                    <constraint firstAttribute="width" constant="138" id="lTe-3H-9Ta"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Current Song" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxt-9h-oEB">
+                                <rect key="frame" x="330" y="228" width="138" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-gG-ev1">
-                                <rect key="frame" x="343" y="96" width="134" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="134" id="SIt-cN-x3s"/>
-                                    <constraint firstAttribute="height" constant="25" id="xhY-FA-WX4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Artist Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-gG-ev1">
+                                <rect key="frame" x="330" y="177" width="134" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume offset: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR5-Ha-vxQ">
-                                <rect key="frame" x="163" y="390" width="188" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <color key="textColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpQ-Um-w0o">
-                                <rect key="frame" x="400" y="361" width="38" height="46"/>
-                                <state key="normal" image="greenUp">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="volumeUpPressed:" destination="cCJ-Uo-b5L" eventType="touchUpInside" id="cOR-As-uxi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWn-EP-LT8">
-                                <rect key="frame" x="404" y="415" width="30" height="46"/>
-                                <state key="normal" image="redDown">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="volumeDownPressed:" destination="cCJ-Uo-b5L" eventType="touchUpInside" id="MGt-Qs-VcN"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="eR5-Ha-vxQ" secondAttribute="centerY" constant="-107.5" id="1Lm-58-XU1"/>
-                            <constraint firstAttribute="centerY" secondItem="TpQ-Um-w0o" secondAttribute="centerY" constant="-84" id="6Os-JM-b6u"/>
-                            <constraint firstItem="0zX-Hm-TPm" firstAttribute="top" secondItem="B9B-WH-K4M" secondAttribute="bottom" constant="8" symbolic="YES" id="Bex-m0-84h"/>
-                            <constraint firstItem="Gle-gG-ev1" firstAttribute="trailing" secondItem="CWn-EP-LT8" secondAttribute="trailing" constant="43" id="D5s-0J-zxj"/>
-                            <constraint firstItem="Gle-gG-ev1" firstAttribute="bottom" secondItem="sPy-VC-9UG" secondAttribute="bottom" id="DlC-3f-FFb"/>
-                            <constraint firstAttribute="centerX" secondItem="eR5-Ha-vxQ" secondAttribute="centerX" constant="43" id="J0h-qi-Wv1"/>
-                            <constraint firstItem="0zX-Hm-TPm" firstAttribute="centerX" secondItem="B9B-WH-K4M" secondAttribute="centerX" id="KH7-Vl-18I"/>
-                            <constraint firstItem="CWn-EP-LT8" firstAttribute="leading" secondItem="eR5-Ha-vxQ" secondAttribute="trailing" constant="53" id="Kx0-VS-SkC"/>
-                            <constraint firstItem="Gle-gG-ev1" firstAttribute="leading" secondItem="pxt-9h-oEB" secondAttribute="leading" id="LOE-76-SYc"/>
-                            <constraint firstItem="vhP-8Y-FNp" firstAttribute="top" secondItem="sPy-VC-9UG" secondAttribute="bottom" constant="13" id="OBE-gr-22S"/>
-                            <constraint firstItem="Gle-gG-ev1" firstAttribute="top" secondItem="tSh-Qd-8pB" secondAttribute="bottom" constant="32" id="Qzb-R0-CSI"/>
-                            <constraint firstItem="TpQ-Um-w0o" firstAttribute="leading" secondItem="eR5-Ha-vxQ" secondAttribute="trailing" constant="49" id="VCO-xf-ap5"/>
-                            <constraint firstItem="sPy-VC-9UG" firstAttribute="top" secondItem="tSh-Qd-8pB" secondAttribute="bottom" constant="22" id="W0H-gN-RdF"/>
-                            <constraint firstItem="DTd-Iz-ZkR" firstAttribute="top" secondItem="0zX-Hm-TPm" secondAttribute="bottom" constant="63" id="Zw2-fp-xTH"/>
-                            <constraint firstItem="0zX-Hm-TPm" firstAttribute="centerX" secondItem="079-iQ-7UV" secondAttribute="centerX" id="hG4-DJ-CaT"/>
-                            <constraint firstItem="pxt-9h-oEB" firstAttribute="top" secondItem="Gle-gG-ev1" secondAttribute="bottom" constant="18" id="hwd-ka-kbR"/>
-                            <constraint firstItem="pxt-9h-oEB" firstAttribute="trailing" secondItem="TpQ-Um-w0o" secondAttribute="trailing" constant="43" id="iGU-hw-J3x"/>
-                            <constraint firstAttribute="centerY" secondItem="CWn-EP-LT8" secondAttribute="centerY" constant="-138" id="pyt-9f-cdw"/>
-                            <constraint firstItem="pxt-9h-oEB" firstAttribute="leading" secondItem="vhP-8Y-FNp" secondAttribute="trailing" constant="36" id="qLZ-hU-gLS"/>
-                            <constraint firstItem="vhP-8Y-FNp" firstAttribute="leading" secondItem="sPy-VC-9UG" secondAttribute="leading" id="xuA-3V-sN3"/>
+                            <constraint firstAttribute="centerY" secondItem="0zX-Hm-TPm" secondAttribute="centerY" constant="-222" id="0QZ-FY-nyP"/>
+                            <constraint firstAttribute="centerY" secondItem="vhP-8Y-FNp" secondAttribute="centerY" constant="60.5" id="2KR-gI-HvA"/>
+                            <constraint firstAttribute="centerX" secondItem="0zX-Hm-TPm" secondAttribute="centerX" constant="-0.5" id="5aF-oh-cWS"/>
+                            <constraint firstAttribute="centerY" secondItem="Gle-gG-ev1" secondAttribute="centerY" constant="110.5" id="DpP-BU-aql"/>
+                            <constraint firstAttribute="centerY" secondItem="pxt-9h-oEB" secondAttribute="centerY" constant="57" id="FjT-r1-PBa"/>
+                            <constraint firstAttribute="centerY" secondItem="B9B-WH-K4M" secondAttribute="centerY" constant="-184" id="VkD-sF-k8E"/>
+                            <constraint firstAttribute="centerX" secondItem="sPy-VC-9UG" secondAttribute="centerX" constant="127.5" id="WYE-mb-Nui"/>
+                            <constraint firstAttribute="centerX" secondItem="Gle-gG-ev1" secondAttribute="centerX" constant="-97" id="Xu0-S9-n1u"/>
+                            <constraint firstAttribute="centerX" secondItem="pxt-9h-oEB" secondAttribute="centerX" constant="-99" id="e8D-OT-whh"/>
+                            <constraint firstAttribute="centerX" secondItem="B9B-WH-K4M" secondAttribute="centerX" constant="-0.5" id="g6m-AF-bDu"/>
+                            <constraint firstAttribute="centerX" secondItem="vhP-8Y-FNp" secondAttribute="centerX" constant="80.5" id="jHI-la-LvQ"/>
+                            <constraint firstAttribute="centerY" secondItem="sPy-VC-9UG" secondAttribute="centerY" constant="110.5" id="uAu-wH-7Vv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="rVR-7L-hJO"/>
                     <connections>
                         <outlet property="artistName" destination="Gle-gG-ev1" id="Dl2-m8-xdI"/>
                         <outlet property="songNameLabel" destination="pxt-9h-oEB" id="6tS-K0-SIV"/>
-                        <outlet property="volumeLabel" destination="eR5-Ha-vxQ" id="Eww-Wb-WwR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQi-g5-oBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -444,17 +392,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Choose a song" id="wgl-lu-HwG">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="10n-cM-tdd">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pgr-rT-7q0">
-                                <rect key="frame" x="451" y="7" width="30" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="save">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="2zk-mf-Wvq" kind="unwind" unwindAction="saveSong:" id="Xq5-oG-wc7"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="10n-cM-tdd">
+                            <color key="tintColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="2zk-mf-Wvq" kind="unwind" unwindAction="saveSong:" id="0vc-F7-Aao"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -464,10 +406,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="greenUp" width="30" height="46"/>
         <image name="play" width="30" height="30"/>
-        <image name="redDown" width="30" height="46"/>
-        <image name="save" width="30" height="29"/>
         <image name="settings" width="30" height="30"/>
     </resources>
 </document>

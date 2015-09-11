@@ -30,8 +30,10 @@ class ItemsViewController: UIViewController {
     @IBOutlet weak var itemsTableView: UITableView!
     
     var g_alert: UIAlertController!
+    var bt_alert: UIAlertController!
     
     let locationManager = CLLocationManager()
+    
     var HKWControl: HKWControlHandler!
     var items: [Item] = []
     
@@ -45,15 +47,18 @@ class ItemsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         loadItems()
         
-        musicInfo = MusicInfo()
-        musicInfo.defaultSong = true;
-        musicInfo.artist = "The Weeknd"
-        musicInfo.songName = "The Hills"
-        musicInfo.songPersistentID = 0;
+        if musicInfo == nil {
+            musicInfo = MusicInfo()
+            musicInfo.defaultSong = true;
+            musicInfo.artist = "The Weeknd"
+            musicInfo.songName = "The Hills"
+            musicInfo.songPersistentID = 0;
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -61,7 +66,7 @@ class ItemsViewController: UIViewController {
             // show the network initialization dialog
             self.g_alert = UIAlertController(title: "Initializing", message: "If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.", preferredStyle: .Alert)
             
-            self.presentViewController(g_alert, animated: true, completion: nil)
+            self.presentViewController(self.g_alert, animated: true, completion: nil)
         }
         
         if !HKWControlHandler.sharedInstance().initializing() && !HKWControlHandler.sharedInstance().isInitialized() {
@@ -230,11 +235,11 @@ class ItemsViewController: UIViewController {
     
     /* Helper method for determining which speaker - beacon is interacting and acts accordingly */
     func checkBeaconAndAdjust(beacon:CLBeacon, index: Int) {
-    
+        var currentDevice = HKWControl.getDeviceInfoByIndex(index)
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
-        if (beacon.proximity == CLProximity.Immediate) { // || beacon.proximity == CLProximity.Near {
+        if beacon.proximity == CLProximity.Immediate || beacon.proximity == CLProximity.Near {
             var volumeLvl = changeVolumeBasedOnRange(beacon)
-            HKWControl.setVolumeDevice(HKWControl.getDeviceInfoByIndex(index).deviceId, volume: volumeLvl)
+            HKWControl.setVolumeDevice(currentDevice.deviceId, volume: volumeLvl)
             println("Beacon major: \(beacon.major.intValue) | minor: \(beacon.minor.intValue) | volume: \(volumeLvl) | rssi: \(beacon.rssi)");
     
             // Uncomment if you want app to start playing automatically when in range of beacons
@@ -246,7 +251,8 @@ class ItemsViewController: UIViewController {
         }
         // If beacon is 'Far' or 'Unknown' (out of reach), turn down the volume of that speaker to 0
         else {
-            HKWControl.setVolumeDevice(HKWControl.getDeviceInfoByIndex(index).deviceId, volume: 0)
+            
+            HKWControl.setVolumeDevice(currentDevice.deviceId, volume: 0)
         }
     
     }
@@ -313,6 +319,15 @@ class ItemsViewController: UIViewController {
         }
         
         return volume;
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let segueName = segue.identifier
+        if segueName == "goToSettingsVC" {
+            println("got here prepToSegue")
+            var destVC: SettingsVC = segue.destinationViewController as! SettingsVC
+            destVC.musicInfo = musicInfo
+        }
     }
 }
 
@@ -408,7 +423,6 @@ extension ItemsViewController: HKWPlayerEventHandlerDelegate {
         }
     }
 }
-
 
 
 

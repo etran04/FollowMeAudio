@@ -15,7 +15,7 @@ class SettingsVC: UIViewController {
 
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var songNameLabel: UILabel!
-    @IBOutlet weak var volumeLabel: UILabel!
+    //@IBOutlet weak var volumeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class SettingsVC: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        volumeLabel.text = "Volume offset: " + String(volumeOffset)
+        //volumeLabel.text = "Volume offset: " + String(volumeOffset)
         if musicInfo != nil {
             artistName.text = musicInfo.artist
             songNameLabel.text = musicInfo.songName
@@ -34,7 +34,7 @@ class SettingsVC: UIViewController {
         }
     }
     
-    @IBAction func volumeUpPressed(sender: UIButton) {
+    /*@IBAction func volumeUpPressed(sender: UIButton) {
         if volumeOffset < 30 {
             volumeOffset += 3
             volumeLabel.text = "Volume offset: " + String(volumeOffset)
@@ -48,7 +48,7 @@ class SettingsVC: UIViewController {
             volumeLabel.text = "Volume offset: " + String(volumeOffset)
             println("VolumeOffset: \(volumeOffset)")
         }
-    }
+    }*/
     
     @IBAction func saveSong(segue: UIStoryboardSegue) {
         let songVC = segue.sourceViewController as! ChooseSoundTableViewController
