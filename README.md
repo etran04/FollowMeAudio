@@ -12,7 +12,11 @@ CURRENT FUNCTIONALITY
 
 CHALLENGES I FACED
 ------------------
-The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and not exact distance indicators, so there had be some form of appoximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (through [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
+The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and not exact distance indicators, so there had be some form of appoximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (trying to use [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
+
+Other difficulties I encountered while developing this app are as followed:
+- I had to use two different kinds of brands of beacon. For some reason, the beacons did not produce the same range of RSSI values when in the same proximity. This means the beacons I used required specific placements so that a beacon's radius for Near/Immediate does not conflict another's radius. 
+- Initially the app worked only with hardcoded speakers-to-beacon pairs. That was really inefficient in that it didn't allow for any use outside of a demo. I was able to include a "Pair Speaker" feature where you click on a beacon, then assign a speaker to it, which fixed that issue.
 
 ACCOMPLISHMENTS I AM PROUD OF
 ----------------------------
@@ -53,3 +57,10 @@ My solution is to delete the 'Derived Data' project in the folder, and do a fres
 TO DO LIST
 ---------
 - Implement Levenberg-Marquardt to smooth out RSSI values for volume control based on actual distance 
+- Include conditional check for which device it is, and adjust the volume accordingly. (Some devices play louder at the same base volume)
+
+CREDITS
+-------
+- [Ray Wenderlich](http://www.raywenderlich.com/101891/ibeacons-tutorial-ios-swift) for the wonderful iBeacon tutorial 
+- [Harman International] (http://www.developer.harman.com/) for an awesome SDK 
+- Icons used in this app are made by [Freepik](http://www.freepik.com/) from [FlatIcon](http://www.flaticon.com/)
