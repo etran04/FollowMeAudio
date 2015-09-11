@@ -36,7 +36,7 @@ For the purpose of this use case, we will be ignoring custom settings (volume of
 7. See that the beacon is paired with the intended speaker.
 8. Press the 'settings' icon at the top left corner.
 9. Play song when ready. Alert will notify user song is playing. 
-10. Stop song when ready. Alert will notify when song is stopped. 
+10. When ready to stop song, go back to 'settings' and press 'stop song'. Alert will notify when song is stopped. 
 
 > Note: For pairing, you have to be in range of a beacon to successfully pair a speaker. Meaning, the beacon's location cannot be "Unknown".
 
