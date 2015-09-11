@@ -5,6 +5,8 @@ WHAT IT DOES
 ------------
 Follow Me Audio is proximity based audio playback using iBeacons with the Harman SDK. It allows for continious audio playback from location to location. The idea is to place iBeacons within or near Harman OMNI speakers, and then have the iPhone keep track of each iBeacon and adjust audio playback, based on the user's location from each iBeacon. 
 
+A use case for this would be to have one speaker in different rooms of a house, all on the same network, and as you enter a room, your music/audio book/etc, will start playing automatically. As you leave a room, the speaker will go quiet in that room. 
+
 CURRENT FUNCTIONALITY
 ---------------------
 - Able to start wake up from sleep and start playing music when in 'Near' or 'Immediate' vicinity of either speakers. 
@@ -12,7 +14,7 @@ CURRENT FUNCTIONALITY
 
 CHALLENGES I FACED
 ------------------
-The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and not exact distance indicators, so there had be some form of appoximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (trying to use [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
+The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and indoor distance indicators, so there had be some form of approximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (trying to use [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
 
 Other difficulties I encountered while developing this app are as followed:
 - I had to use two different kinds of brands of beacon. For some reason, the beacons did not produce the same range of RSSI values when in the same proximity. This means the beacons I used required specific placements so that a beacon's radius for Near/Immediate does not conflict another's radius. 
