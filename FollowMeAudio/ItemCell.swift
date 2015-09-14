@@ -22,6 +22,13 @@ class ItemCell: UITableViewCell {
             item?.addObserver(self, forKeyPath: "lastSeenBeacon", options: .New, context: nil)
       
             textLabel!.text = item?.name
+            if (item != nil && item!.speakerPair != nil) {
+                detailTextLabel!.text = "Location: Unknown || RSII: 0 || Paired w/: \(item!.speakerPair)"
+            }
+            else {
+                detailTextLabel!.text = "Location: Unknown || RSII: 0 || Paired w/: N/A"
+                
+            }
         }
     }
   
@@ -36,7 +43,7 @@ class ItemCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         item = nil
-        detailTextLabel!.text = "Location: Unknown"
+        detailTextLabel!.text = "Location: Unknown" 
     }
   
     override func setSelected(selected: Bool, animated: Bool) {
@@ -64,9 +71,6 @@ class ItemCell: UITableViewCell {
                 let rssi = anItem.lastSeenBeacon!.rssi
                 let pairName = anItem.speakerPair
                 detailTextLabel!.text = "Location: \(proximity) || RSII: \(rssi) || Paired w/: \(pairName)"
-            }
-            else {
-                detailTextLabel!.text = "Location: Cannot be determined"
             }
         }
     }

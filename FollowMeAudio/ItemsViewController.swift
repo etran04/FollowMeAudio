@@ -27,18 +27,19 @@ class ItemsViewController: UIViewController {
     @IBOutlet weak var itemsTableView: UITableView!
     
     var g_alert: UIAlertController!
-    var bt_alert: UIAlertController!
     
     let locationManager = CLLocationManager()
-    
     var HKWControl: HKWControlHandler!
+    
+    // Stores list of beacons
     var items: [Item] = []
     
+    // Store speaker name to a beacon
     var nameToIndexes = [String: Item]()
-    
-    var musicInfo: MusicInfo!
     var currentItemNdx: Int!
     
+    // Current playback variables
+    var musicInfo: MusicInfo!
     var playFlag = false
     var stopFlag = false
     
@@ -151,6 +152,8 @@ class ItemsViewController: UIViewController {
     }
   
     // MARK: Unwind Segue actions
+    
+    // Called when a user clicks to save a beacon to the list
     @IBAction func saveItem(segue: UIStoryboardSegue) {
         let addItemViewController = segue.sourceViewController as! AddItemViewController
         if let newItem = addItemViewController.newItem {
@@ -165,6 +168,7 @@ class ItemsViewController: UIViewController {
         }
     }
     
+    // Called when the user selects 'Play Song' on SettingsVC
     @IBAction func playSong(segue: UIStoryboardSegue) {
         let songVC = segue.sourceViewController as! SettingsVC
         if let newSong = songVC.musicInfo {
@@ -173,6 +177,7 @@ class ItemsViewController: UIViewController {
         startPlayback()
     }
     
+    // Called when a user is clicks on a speaker to pair the beacon
     @IBAction func savePairedSpeaker(segue: UIStoryboardSegue) {
         let speakerVC = segue.sourceViewController as! SpeakerSelectionTableViewController
         if (speakerVC.speakerName != nil) {
@@ -180,6 +185,11 @@ class ItemsViewController: UIViewController {
             items[currentItemNdx].setSpeakerPairName(speakerVC.speakerName)
             clearUnpairedSpeakers()
             persistItems()
+            
+            // update table 
+            self.itemsTableView.beginUpdates()
+            self.itemsTableView.reloadData()
+            self.itemsTableView.endUpdates()
         }
     }
   
@@ -204,7 +214,6 @@ class ItemsViewController: UIViewController {
             }
         }
     }
-    
     
     /* Helper method for removing all inactive beacon speaker pairs from session */
     func clearUnpairedSpeakers() {
@@ -329,6 +338,7 @@ class ItemsViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let segueName = segue.identifier
+        // Passes the current song info to the settings VC to display
         if segueName == "goToSettingsVC" {
             var destVC: SettingsVC = segue.destinationViewController as! SettingsVC
             destVC.musicInfo = musicInfo
@@ -373,7 +383,7 @@ extension ItemsViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let item = items[indexPath.row] as Item
         let uuid = item.uuid.UUIDString
-        let detailMessage = "UUID: \(uuid)\nMajor: \(item.majorValue)\nMinor: \(item.minorValue)"
+        let detailMessage = "UUID: \(uuid)\nMajor: \(item.majorValue)\nMinor: \(item.minorValue)\nPaired w/: \(item.speakerPair)"
         let detailAlert = UIAlertController(title: "Details", message: detailMessage, preferredStyle: .Alert)
         detailAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         detailAlert.addAction(UIAlertAction(title: "Pair speaker", style: .Default, handler: { action in
@@ -400,10 +410,13 @@ extension ItemsViewController: CLLocationManagerDelegate {
         if let beacons = beacons as? [CLBeacon] {
             for beacon in beacons {
                 for item in items {
+                    
+                    // Assign speaker indexes to beacons if neccesary
+                    searchBeacons(item)
+                    
                     if item == beacon {
                         
                         // Assign speaker indexes to beacons if neccesary
-                        searchBeacons(item)
                         item.lastSeenBeacon = beacon
                         
                         // There is an associated beacon to speaker pair
