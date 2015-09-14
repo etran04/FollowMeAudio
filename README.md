@@ -9,7 +9,7 @@ A use case for this would be to have one speaker in different rooms of a house, 
 
 ##CURRENT FUNCTIONALITY
 - Able to start wake up from sleep and start playing music when in 'Near' or 'Immediate' vicinity of either speakers. 
-- When 'Far', volume of associated speaker will drop to 0. 
+- When 'Far' or 'Unknown', volume of associated speaker will fade out to 0.
 
 ##CHALLENGES I FACED
 The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and indoor distance indicators, so there had be some form of approximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (trying to use [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
@@ -58,6 +58,7 @@ My solution is to delete the 'Derived Data' project in the folder, and do a fres
 ##TO DO LIST
 - Implement Levenberg-Marquardt to smooth out RSSI values for volume control based on actual distance 
 - Include conditional check for which device it is, and adjust the volume accordingly. (Some devices play louder at the same base volume)
+- Fade volume up in instead of going from volume 0 to volume X
 
 ##CREDITS
 - [Ray Wenderlich](http://www.raywenderlich.com/101891/ibeacons-tutorial-ios-swift) for the wonderful iBeacon tutorial 
