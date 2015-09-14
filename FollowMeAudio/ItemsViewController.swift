@@ -76,6 +76,7 @@ class ItemsViewController: UIViewController {
                 println("InitializeHKWirelessControl - OK");
                 
                 self.HKWControl = HKWControlHandler.sharedInstance()
+                self.HKWControl.setVolume(0)
 
                 // dismiss the network initialization dialog
                 if self.g_alert != nil {
@@ -251,8 +252,12 @@ class ItemsViewController: UIViewController {
         // If beacon is 'Far' or 'Unknown' (out of reach), turn down the volume of that speaker to 0
         else {
             // This condition allows for fading out...
-            if currentDevice.volume > 0 {
+            if currentDevice.volume >= 3 {
                 HKWControl.setVolumeDevice(currentDevice.deviceId, volume: currentDevice.volume - 3)
+            }
+            else {
+                HKWControl.setVolumeDevice(currentDevice.deviceId, volume: currentDevice.volume - 0)
+
             }
         }
     

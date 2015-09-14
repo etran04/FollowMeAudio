@@ -10,6 +10,8 @@
 	<string>FollowMe</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>DF5CA1AB7BD449BB6233C7E5D2CD9F70274C7979</key>
+		<string>https://github.com/tylerfreckmann/HKIoTDemo.git</string>
 		<key>F22CAF835BDCAD9B81B5FBC547A701FB9F689F80</key>
 		<string>https://github.com/etran04/FollowMeAudio.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>FollowMe.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>DF5CA1AB7BD449BB6233C7E5D2CD9F70274C7979</key>
+		<string>../../..</string>
 		<key>F22CAF835BDCAD9B81B5FBC547A701FB9F689F80</key>
 		<string>../..</string>
 	</dict>
@@ -28,6 +32,14 @@
 	<string>F22CAF835BDCAD9B81B5FBC547A701FB9F689F80</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DF5CA1AB7BD449BB6233C7E5D2CD9F70274C7979</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
