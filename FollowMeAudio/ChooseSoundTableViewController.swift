@@ -86,6 +86,11 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
             } else {
                 defaultCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
                 soundCell?.accessoryType = UITableViewCellAccessoryType.None
+                
+                musicInfo.defaultSong = true
+                musicInfo.artist = "The Weeknd"
+                musicInfo.songName = "The Hills"
+                musicInfo.songPersistentID = 0
             }
         }
     }
