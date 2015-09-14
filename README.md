@@ -11,6 +11,8 @@ A use case for this would be to have one speaker in different rooms of a house, 
 - Able to start wake up from sleep and start playing music when in 'Near' or 'Immediate' vicinity of either speakers. 
 - When 'Far' or 'Unknown', volume of associated speaker will fade out to 0.
 
+> Note: These are the core functionality of the project. Will add more when I can think of it. 
+
 ##CHALLENGES I FACED
 The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and indoor distance indicators, so there had be some form of approximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (trying to use [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
 
@@ -38,8 +40,6 @@ For the purpose of this use case, we will be ignoring custom settings (volume of
 9. Play song when ready. Alert will notify user song is playing. 
 10. When ready to stop song, go back to 'settings' and press 'stop song'. Alert will notify when song is stopped. 
 
-> Note: For pairing, you have to be in range of a beacon to successfully pair a speaker. Meaning, the beacon's location cannot be "Unknown".
-
 ![Imgur](http://i.imgur.com/7u7zRaw.png)
 
 ##FAQs
@@ -54,6 +54,10 @@ When a user clicks on a beacon, an option to 'Pair Speaker' will be available. T
 **Q. I got error "PCH was compiled with module cache path". How do I fix it?**
 
 My solution is to delete the 'Derived Data' project in the folder, and do a fresh clean build, then compile.
+
+**Q. How is a beacon paired to a speaker?**
+
+Great question. When a user clicks on "Pair beacon" they are taken to a list of all available speakers on the network. When they click on the speaker, the app takes the speaker's name and stores it in a temporary dictionary of speaker names to a beacon item. 
 
 ##TO DO LIST
 - Implement Levenberg-Marquardt to smooth out RSSI values for volume control based on actual distance 
