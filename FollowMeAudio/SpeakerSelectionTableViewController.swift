@@ -46,12 +46,16 @@ class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEvent
         // Show the checkmark if the speaker is active
         if deviceInfo.active {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-            // Added to remove users from selecting speakers that are already selected
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            // Added to gray out speakers that are already active and paired
+            cell.selectionStyle = UITableViewCellSelectionStyle.Gray
+            cell.textLabel?.enabled = false
+            cell.detailTextLabel?.enabled = false
             cell.userInteractionEnabled = false
         } else {
             cell.accessoryType = UITableViewCellAccessoryType.None
             cell.selectionStyle = UITableViewCellSelectionStyle.Default
+            cell.textLabel?.enabled = true
+            cell.detailTextLabel?.enabled = true
             cell.userInteractionEnabled = true
         }
         return cell
