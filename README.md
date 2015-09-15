@@ -24,20 +24,20 @@ Other difficulties I encountered while developing this app are as followed:
 The code was originally written in Objective C. Porting it to Swift made it feel more clean and looked asthetically more pleasing. I'm happy to say that if the beacons are placed in prime locations (spread out/not within each other proximity), Follow Me Audio works really well. I'm also happy to say it looks decent for a first iOS project. I really enjoyed working on the front end user interface, such as the color theme, button placement, and how user interaction was handled. There's still plenty to be done, but overall, it was a good experience developing this and playing around with iBeacons and Harman SDK.
 
 ##HOW TO USE
-For the purpose of this use case, we will be ignoring custom settings (volume offset, song selection)
-<br>This scenario will run the default song (The Hills by The Weeknd @ volume offset: 0)
+For the purpose of this use case, we will be ignoring custom settings (song selection)
+<br>This scenario will run the default song (The Hills by The Weeknd)
 
 **Please make sure your Bluetooth is on! iBeacons uses BLE (Bluetooth Low Energy) in order to detect proximity.**
 
 1. Go into app 'FollowMe'
 2. Press the '+' sign at the top right corner. 
 3. Input beacon information, then press save.
-4. See that beacon is registered. Location should be updating. 
+4. See that beacon is registered. Location should be updating. (Repeat for as many beacons as you need)
 5. Pair the beacon to a speaker by clicking on the beacon, and then 'Pair Speaker'
 6. Select an inactive speaker from the list of speakers. 
 7. See that the beacon is paired with the intended speaker.
 8. Press the 'settings' icon at the top left corner.
-9. Play song when ready. Alert will notify user song is playing. 
+9. Play song when ready. Alert will notify user song is playing. (Now you can move around, room to room, etc)
 10. When ready to stop song, go back to 'settings' and press 'stop song'. Alert will notify when song is stopped. 
 
 ![Imgur](http://i.imgur.com/7u7zRaw.png)
