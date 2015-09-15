@@ -87,6 +87,7 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
                 defaultCell?.accessoryType = UITableViewCellAccessoryType.Checkmark
                 soundCell?.accessoryType = UITableViewCellAccessoryType.None
                 
+                // Default song was selected
                 musicInfo.defaultSong = true
                 musicInfo.artist = "The Weeknd"
                 musicInfo.songName = "The Hills"
@@ -116,19 +117,5 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
     func mediaPickerDidCancel(mediaPicker: MPMediaPickerController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "saveSong" {
-            let destVC = segue.destinationViewController as! ItemsViewController
-            destVC.musicInfo = musicInfo
-            println("in save song")
-        }
-    }*/
-
 
 }
