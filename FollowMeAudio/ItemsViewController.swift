@@ -71,10 +71,10 @@ class ItemsViewController: UIViewController {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 if HKWControlHandler.sharedInstance().initializeHKWirelessController(kLicenseKeyGlobal, withSpeakersAdded:false) != 0 {
-                    println("initializeHKWirelessControl failed : invalid license key")
+                    print("initializeHKWirelessControl failed : invalid license key")
                     return
                 }
-                println("InitializeHKWirelessControl - OK");
+                print("InitializeHKWirelessControl - OK");
                 
                 self.HKWControl = HKWControlHandler.sharedInstance()
                 self.HKWControl.setVolume(0)
@@ -181,7 +181,7 @@ class ItemsViewController: UIViewController {
     @IBAction func savePairedSpeaker(segue: UIStoryboardSegue) {
         let speakerVC = segue.sourceViewController as! SpeakerSelectionTableViewController
         if (speakerVC.speakerName != nil) {
-            println("MainVC: Paired speaker name is \(speakerVC.speakerName)")
+            print("MainVC: Paired speaker name is \(speakerVC.speakerName)")
             items[currentItemNdx].setSpeakerPairName(speakerVC.speakerName)
             clearUnpairedSpeakers()
             persistItems()
@@ -204,10 +204,10 @@ class ItemsViewController: UIViewController {
      */
     func searchBeacons(item: Item) {
         for (var i = 0; i < HKWControl?.getDeviceCount(); i++) {
-            var dInfo = HKWControl.getDeviceInfoByIndex(i)
+            let dInfo = HKWControl.getDeviceInfoByIndex(i)
             if dInfo.deviceName == item.speakerPair && nameToIndexes[dInfo.deviceName] == nil {
-                println("DeviceName: \(dInfo.deviceName) | BeaconName: \(item.name)");
-                println("Assigning speaker: \(dInfo.deviceName) w/ \(i)...")
+                print("DeviceName: \(dInfo.deviceName) | BeaconName: \(item.name)");
+                print("Assigning speaker: \(dInfo.deviceName) w/ \(i)...")
                 item.setIndex(i)
                 nameToIndexes[dInfo.deviceName] = item
                 HKWControl.addDeviceToSession(dInfo.deviceId)
@@ -218,22 +218,22 @@ class ItemsViewController: UIViewController {
     /* Helper method for removing all inactive beacon speaker pairs from session */
     func clearUnpairedSpeakers() {
         if items.count == 0 {
-            println("Removed all speakers from session")
+            print("Removed all speakers from session")
             for (var i = 0; i < HKWControl?.getDeviceCount(); i++) {
-                var dInfo = HKWControl.getDeviceInfoByIndex(i)
+                let dInfo = HKWControl.getDeviceInfoByIndex(i)
                 HKWControl.removeDeviceFromSession(dInfo.deviceId)
                 nameToIndexes.removeValueForKey(dInfo.deviceName)
             }
         }
         else {
             for (var i = 0; i < HKWControl?.getDeviceCount(); i++) {
-                var dInfo = HKWControl.getDeviceInfoByIndex(i)
+                let dInfo = HKWControl.getDeviceInfoByIndex(i)
                 for (var j = 0; j < items.count; j++) {
-                    var bInfo = items[j]
+                    let bInfo = items[j]
                     if dInfo.deviceName != bInfo.speakerPair && dInfo.active{
                         HKWControl.removeDeviceFromSession(dInfo.deviceId)
                         nameToIndexes.removeValueForKey(dInfo.deviceName)
-                        println("Removing speaker: \(dInfo.deviceName) from session...")
+                        print("Removing speaker: \(dInfo.deviceName) from session...")
                     }
                 }
             }
@@ -242,10 +242,10 @@ class ItemsViewController: UIViewController {
     
     /* Helper method for determining which speaker - beacon is interacting and acts accordingly */
     func checkBeaconAndAdjust(beacon:CLBeacon, index: Int) {
-        var currentDevice = HKWControl.getDeviceInfoByIndex(index)
+        let currentDevice = HKWControl.getDeviceInfoByIndex(index)
         // If the beacon is 'Near' or 'Immediate'(ly) close, play music on that speaker and adjust the volume if we move around.
         if beacon.proximity == CLProximity.Immediate || beacon.proximity == CLProximity.Near {
-            var volumeLvl = changeVolumeBasedOnRange(beacon)
+            let volumeLvl = changeVolumeBasedOnRange(beacon)
             HKWControl.setVolumeDevice(currentDevice.deviceId, volume: volumeLvl)
             
             // Debugging print to check which speaker is playing
@@ -276,15 +276,19 @@ class ItemsViewController: UIViewController {
     func playStreamingWithPersistentID(playDefault: Bool, persistentId: MPMediaEntityPersistentID ) {
         // Default song
         if playDefault {
-            var bundleRoot = NSBundle.mainBundle().bundlePath
-            var dirContents: NSArray = NSFileManager.defaultManager().contentsOfDirectoryAtPath(bundleRoot, error: nil)!
-            var fltr: NSPredicate = NSPredicate(format: "self ENDSWITH '.mp3'")
-            var g_mp3Files = dirContents.filteredArrayUsingPredicate(fltr) as! [String]
-    
-            var assetURL = NSURL.fileURLWithPath(bundleRoot.stringByAppendingPathComponent(g_mp3Files[0]))
-            println("NSURL: \(assetURL)")
-    
-            HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
+            let bundleRoot = NSBundle.mainBundle().bundlePath
+            do {
+                let dirContents: NSArray = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(bundleRoot)
+                let fltr: NSPredicate = NSPredicate(format: "self ENDSWITH '.mp3'")
+                var g_mp3Files = dirContents.filteredArrayUsingPredicate(fltr) as! [String]
+                
+                let assetURL = NSURL.fileURLWithPath(g_mp3Files[0])
+                print("NSURL: \(assetURL)")
+                
+                HKWControl.playCAF(assetURL, songName:g_mp3Files[0], resumeFlag:true);
+            } catch is ErrorType {
+                print("Error in playStreaming")
+            }
         }
         // Chosen song
         else {
@@ -292,11 +296,11 @@ class ItemsViewController: UIViewController {
             let predicate = MPMediaPropertyPredicate(value: String(persistentId), forProperty: MPMediaItemPropertyPersistentID)
             query.addFilterPredicate(predicate)
             
-            let item = query.items.first as! MPMediaItem
-            var assetURL = item.assetURL
+            let item = query.items!.first! as MPMediaItem
+            let assetURL = item.assetURL
             HKWControl.playCAF(assetURL, songName: item.title, resumeFlag: false)
             
-            println("Playing \(item.title) from library")
+            print("Playing \(item.title) from library")
         }
         playFlag = true;
     }
@@ -306,11 +310,11 @@ class ItemsViewController: UIViewController {
         if HKWControl.isPlaying() {
             HKWControl.stop()
             stopFlag = true
-            println("Stopped playing...")
+            print("Stopped playing...")
         }
         else {
             playStreamingWithPersistentID(musicInfo.defaultSong, persistentId: musicInfo.songPersistentID)
-            println("Started playing...")
+            print("Started playing...")
         }
     }
     
@@ -340,7 +344,7 @@ class ItemsViewController: UIViewController {
         let segueName = segue.identifier
         // Passes the current song info to the settings VC to display
         if segueName == "goToSettingsVC" {
-            var destVC: SettingsVC = segue.destinationViewController as! SettingsVC
+            let destVC: SettingsVC = segue.destinationViewController as! SettingsVC
             destVC.musicInfo = musicInfo
         }
     }
@@ -387,7 +391,7 @@ extension ItemsViewController: UITableViewDelegate {
         let detailAlert = UIAlertController(title: "Details", message: detailMessage, preferredStyle: .Alert)
         detailAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         detailAlert.addAction(UIAlertAction(title: "Pair speaker", style: .Default, handler: { action in
-            println("Showing pair speaker screen...")
+            print("Showing pair speaker screen...")
             self.currentItemNdx = indexPath.row
             self.performSegueWithIdentifier("pairSpeakersSegue", sender: self)
         }))
@@ -398,29 +402,29 @@ extension ItemsViewController: UITableViewDelegate {
 
 // MARK: CLLocationManagerDelegate
 extension ItemsViewController: CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager!, monitoringDidFailForRegion region: CLRegion!, withError error: NSError!) {
-        println("Failed monitoring region: \(error.description)")
+    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+        print("Failed monitoring region: \(error.description)")
     }
   
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println("Location manager failed: \(error.description)")
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Location manager failed: \(error.description)")
     }
-  
-    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+    
+    func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
         if let beacons = beacons as? [CLBeacon] {
             for beacon in beacons {
                 for item in items {
-                    
+        
                     // Assign speaker indexes to beacons if neccesary
                     searchBeacons(item)
-                    
+        
                     if item == beacon {
-                        
+        
                         // Assign speaker indexes to beacons if neccesary
                         item.lastSeenBeacon = beacon
-                        
+        
                         // There is an associated beacon to speaker pair
-                        var speakerNdx = nameToIndexes[item.speakerPair]?.speakerNdx;
+                        let speakerNdx = nameToIndexes[item.speakerPair]?.speakerNdx;
                         if speakerNdx != nil {
                             checkBeaconAndAdjust(beacon, index: speakerNdx!)
                         }
