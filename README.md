@@ -13,6 +13,9 @@ A use case for this would be to have one speaker in different rooms of a house, 
 
 > Note: These are the core functionality of the project. Will add more when I can think of it. 
 
+##VIDEO
+Click [here](https://www.youtube.com/watch?v=SqSm9mkGPmo) for a interactive Youtube demo showing how to set up and use FollowMeAudio as well as a quick video of using it in the office towards the end. 
+
 ##CHALLENGES I FACED
 The most difficult part of this project was a feature I haven't finished implementing. I wanted to find a way to handle volume control based on the distance of the user from the iBeacon associated with a speaker. The issue is iBeacons are meant to be used as proximity sensors and not as exact indoor distance indicators, so there had be some form of approximation involved to implement this. I attempted to do this initially with linear regression but that did not work due to the sporadic behavior of the iBeacons. I recently attempted nonlinear approximation through Levenberg-Marquardt algorithm (trying to use [Cere's Solver](http://ceres-solver.org/index.html), Google's Framework for solving large, complicated optimization problems), but it has been difficult to implement, so I have tabled it for now. 
 
