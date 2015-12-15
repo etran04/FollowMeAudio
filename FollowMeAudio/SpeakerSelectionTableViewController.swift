@@ -33,14 +33,14 @@ class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEvent
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Speaker_Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Speaker_Cell", forIndexPath: indexPath)
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
-        var deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(indexPath.section, deviceIndex: indexPath.row)
+        let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(indexPath.section, deviceIndex: indexPath.row)
         
         cell.textLabel?.text = deviceInfo.deviceName;
-        var uniqueId: NSString = NSString(format: "ID:%llu, Vol:%d", deviceInfo.deviceId, deviceInfo.volume)
+        let uniqueId: NSString = NSString(format: "ID:%llu, Vol:%d", deviceInfo.deviceId, deviceInfo.volume)
         cell.detailTextLabel?.text = uniqueId as String
         
         // Show the checkmark if the speaker is active
@@ -62,19 +62,19 @@ class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEvent
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var header = HKWControlHandler.sharedInstance().getDeviceGroupNameByIndex(section);
+        let header = HKWControlHandler.sharedInstance().getDeviceGroupNameByIndex(section);
         return header
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Speaker_Cell", forIndexPath: indexPath) as! UITableViewCell
-        var deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(indexPath.section, deviceIndex: indexPath.row)
+        _ = tableView.dequeueReusableCellWithIdentifier("Speaker_Cell", forIndexPath: indexPath)
+        let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(indexPath.section, deviceIndex: indexPath.row)
         
         if !deviceInfo.active {
             // Choosing an unpaired speaker
-            println("SpeakerSelectVC: Choosing an unpaired speaker...")
+            print("SpeakerSelectVC: Choosing an unpaired speaker...")
             speakerName = deviceInfo.deviceName
-            println("SpeakerSelectVC: Pairing with speaker: \(deviceInfo.deviceName)")
+            print("SpeakerSelectVC: Pairing with speaker: \(deviceInfo.deviceName)")
             HKWControlHandler.sharedInstance().addDeviceToSession(deviceInfo.deviceId)
             self.performSegueWithIdentifier("finishPairWithSpeaker", sender: self)
         }
@@ -86,6 +86,6 @@ class SpeakerSelectionTableViewController: UITableViewController, HKWDeviceEvent
     }
     
     func hkwErrorOccurred(errorCode: Int, withErrorMessage errorMesg: String!) {
-        println("Error: \(errorMesg)")
+        print("Error: \(errorMesg)")
     }
 }

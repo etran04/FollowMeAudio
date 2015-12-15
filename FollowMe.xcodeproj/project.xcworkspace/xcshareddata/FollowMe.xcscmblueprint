@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F22CAF835BDCAD9B81B5FBC547A701FB9F689F80",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DF5CA1AB7BD449BB6233C7E5D2CD9F70274C7979" : 0,
+    "F22CAF835BDCAD9B81B5FBC547A701FB9F689F80" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "27299533-0C1B-4C50-9B8D-2BD05BD504FE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DF5CA1AB7BD449BB6233C7E5D2CD9F70274C7979" : "",
+    "F22CAF835BDCAD9B81B5FBC547A701FB9F689F80" : "FollowMeAudio"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FollowMe",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FollowMe.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tylerfreckmann\/HKIoTDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF5CA1AB7BD449BB6233C7E5D2CD9F70274C7979"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/etran04\/FollowMeAudio.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F22CAF835BDCAD9B81B5FBC547A701FB9F689F80"
+    }
+  ]
+}

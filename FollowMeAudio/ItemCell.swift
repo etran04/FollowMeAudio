@@ -62,16 +62,30 @@ class ItemCell: UITableViewCell {
             return "Far"
         }
     }
-  
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if let anItem = object as? Item {
             if anItem == item && keyPath == "lastSeenBeacon" {
                 let proximity = nameForProximity(anItem.lastSeenBeacon!.proximity)
-                let accuracy = NSString(format: "%.2f", anItem.lastSeenBeacon!.accuracy)
+                _ = NSString(format: "%.2f", anItem.lastSeenBeacon!.accuracy)
                 let rssi = anItem.lastSeenBeacon!.rssi
                 let pairName = anItem.speakerPair
                 detailTextLabel!.text = "Location: \(proximity) || RSII: \(rssi) || Paired w/: \(pairName)"
             }
         }
+        
     }
+  
+//    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+//        if let anItem = object as? Item {
+//            if anItem == item && keyPath == "lastSeenBeacon" {
+//                let proximity = nameForProximity(anItem.lastSeenBeacon!.proximity)
+//                _ = NSString(format: "%.2f", anItem.lastSeenBeacon!.accuracy)
+//                let rssi = anItem.lastSeenBeacon!.rssi
+//                let pairName = anItem.speakerPair
+//                detailTextLabel!.text = "Location: \(proximity) || RSII: \(rssi) || Paired w/: \(pairName)"
+//            }
+//        }
+//    }
+        
 }

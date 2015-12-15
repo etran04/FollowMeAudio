@@ -49,7 +49,7 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var optionalCell: AnyObject? = tableView.dequeueReusableCellWithIdentifier("cell")
+        let optionalCell: AnyObject? = tableView.dequeueReusableCellWithIdentifier("cell")
         var cell: UITableViewCell
         if optionalCell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
@@ -72,10 +72,10 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell = tableView.cellForRowAtIndexPath(indexPath)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
         if cell?.accessoryType == UITableViewCellAccessoryType.None {
-            var defaultCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
-            var soundCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+            let defaultCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+            let soundCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
             
             // If song cell is checked
             if defaultCell?.accessoryType == UITableViewCellAccessoryType.Checkmark {
@@ -105,16 +105,16 @@ class ChooseSoundTableViewController: UITableViewController, MPMediaPickerContro
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
-    func mediaPicker(mediaPicker: MPMediaPickerController!, didPickMediaItems mediaItemCollection: MPMediaItemCollection!) {
+    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        let mediaItem = mediaItemCollection.items[0] as! MPMediaItem
+        let mediaItem = mediaItemCollection.items[0]
         musicInfo.defaultSong = false;
         musicInfo.artist = mediaItem.artist
         musicInfo.songName = mediaItem.title
         musicInfo.songPersistentID = mediaItem.persistentID
     }
     
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController!) {
+    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 

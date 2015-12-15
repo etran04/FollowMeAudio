@@ -16,7 +16,8 @@ class AddItemViewController: UITableViewController {
     @IBOutlet weak var majorIdTextField: UITextField!
     @IBOutlet weak var minorIdTextField: UITextField!
   
-    var uuidRegex = NSRegularExpression(pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", options: .CaseInsensitive, error: nil)!
+    var uuidRegex = try! NSRegularExpression(pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+        options: [.CaseInsensitive])
     var nameFieldValid = false
     var UUIDFieldValid = false
     var newItem: Item?
@@ -30,12 +31,12 @@ class AddItemViewController: UITableViewController {
     }
   
     func nameTextFieldChanged(textField: UITextField) {
-        nameFieldValid = (count(textField.text) > 0)
+        nameFieldValid = (textField.text!.characters.count > 0)
         saveBarButtonItem.enabled = (UUIDFieldValid && nameFieldValid)
     }
   
     func uuidTextFieldChanged(textField: UITextField) {
-        let numberOfMatches = uuidRegex.numberOfMatchesInString(textField.text, options: nil, range: NSMakeRange(0, count(textField.text)))
+        let numberOfMatches = uuidRegex.numberOfMatchesInString(textField.text!, options: .WithoutAnchoringBounds, range: NSMakeRange(0, textField.text!.characters.count))
         UUIDFieldValid = (numberOfMatches > 0)
     
         saveBarButtonItem.enabled = (UUIDFieldValid && nameFieldValid)
@@ -43,11 +44,11 @@ class AddItemViewController: UITableViewController {
   
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveItemSegue" {
-            let uuid = NSUUID(UUIDString: uuidTextField.text)
-            let major: CLBeaconMajorValue = UInt16(majorIdTextField.text.toInt()!)
-            let minor: CLBeaconMinorValue = UInt16(minorIdTextField.text.toInt()!)
+            let uuid = NSUUID(UUIDString: uuidTextField.text!)
+            let major: CLBeaconMajorValue = UInt16(Int(majorIdTextField.text!)!)
+            let minor: CLBeaconMinorValue = UInt16(Int(minorIdTextField.text!)!)
       
-            newItem = Item(name: nameTextField.text, uuid: uuid!, majorValue: major, minorValue: minor)
+            newItem = Item(name: nameTextField.text!, uuid: uuid!, majorValue: major, minorValue: minor)
         }
     }
 }

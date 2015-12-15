@@ -16,8 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let locationManager = CLLocationManager()
   
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let notificationType:UIUserNotificationType = UIUserNotificationType.Sound | UIUserNotificationType.Alert
-        let notificationSettings = UIUserNotificationSettings(forTypes: notificationType, categories: nil)
+        let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     
         locationManager.delegate = self
@@ -50,9 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: CLLocationManagerDelegate
 extension AppDelegate: CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-        if let beaconRegion = region as? CLBeaconRegion {
-            var notification = UILocalNotification()
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if let _ = region as? CLBeaconRegion {
+            let notification = UILocalNotification()
             notification.alertBody = "Left a beacon region!"
             notification.soundName = "Default"
             //UIApplication.sharedApplication().presentLocalNotificationNow(notification)
