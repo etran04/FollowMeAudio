@@ -62,6 +62,10 @@ My solution is to delete the 'Derived Data' project in the folder, and do a fres
 
 Great question. When a user clicks on "Pair beacon" they are taken to a list of all available speakers on the network. When they click on the speaker, the app takes the speaker's name and stores it in a temporary dictionary of speaker names to a beacon item. 
 
+**Q. I got error "Undefined symbols for architecture x86_64". How do I fix it?
+
+This error occurs because you're trying to run the application on the XCode simulator. The Harman SDK does not support use of the simulator, it must be ran directly on a phone. 
+
 ##TO DO LIST
 - Implement Levenberg-Marquardt to smooth out RSSI values for volume control based on actual distance 
 - Include conditional check for which device it is, and adjust the volume accordingly. (Some devices play louder at the same base volume)
