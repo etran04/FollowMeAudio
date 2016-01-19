@@ -263,7 +263,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Harman International";
 				TargetAttributes = {
 					FB9CC9551AD701910038DF33 = {
@@ -382,6 +382,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -454,6 +455,7 @@
 					"$(PROJECT_DIR)/HKWirelessHDSDK/lib",
 				);
 				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harman.etran.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FollowMe;
 				SWIFT_OBJC_BRIDGING_HEADER = "FollowMeAudio/Bridging-Header.h";
 			};
@@ -473,6 +475,7 @@
 					"$(PROJECT_DIR)/HKWirelessHDSDK/lib",
 				);
 				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harman.etran.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FollowMe;
 				SWIFT_OBJC_BRIDGING_HEADER = "FollowMeAudio/Bridging-Header.h";
 			};
@@ -493,6 +496,7 @@
 				);
 				INFOPLIST_FILE = FollowMeAudioTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harman.etran.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FollowMeTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FollowMeAudio.app/FollowMeAudio";
 			};
@@ -509,6 +513,7 @@
 				);
 				INFOPLIST_FILE = FollowMeAudioTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.harman.etran.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = FollowMeTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FollowMeAudio.app/FollowMeAudio";
 			};
