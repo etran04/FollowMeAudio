@@ -333,8 +333,6 @@ class ItemsViewController: UIViewController {
             break;
         case CLProximity.Unknown:
             break;
-        default:
-            break;
         }
         
         return volume;
@@ -411,28 +409,26 @@ extension ItemsViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
-        if let beacons = beacons as? [CLBeacon] {
-            for beacon in beacons {
-                for item in items {
+        for beacon in beacons {
+            for item in items {
         
+                // Assign speaker indexes to beacons if neccesary
+                searchBeacons(item)
+        
+                if item == beacon {
                     // Assign speaker indexes to beacons if neccesary
-                    searchBeacons(item)
+                    item.lastSeenBeacon = beacon
         
-                    if item == beacon {
-        
-                        // Assign speaker indexes to beacons if neccesary
-                        item.lastSeenBeacon = beacon
-        
-                        // There is an associated beacon to speaker pair
-                        let speakerNdx = nameToIndexes[item.speakerPair]?.speakerNdx;
-                        if speakerNdx != nil {
-                            checkBeaconAndAdjust(beacon, index: speakerNdx!)
-                        }
+                    // There is an associated beacon to speaker pair
+                    let speakerNdx = nameToIndexes[item.speakerPair]?.speakerNdx;
+                    if speakerNdx != nil {
+                        checkBeaconAndAdjust(beacon, index: speakerNdx!)
                     }
                 }
             }
         }
     }
+    
 }
 
 // MARK: HKWDeviceHandlerDelegate
